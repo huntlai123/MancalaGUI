@@ -29,9 +29,8 @@ public class BoardTester {
 		// else if BoardStyle2 was chosen, initialize myStyle with BoardStyle2 with the chosen number of stones.
     	
     	// Declare and initialize Board object. Set references of listeners from Panel to Board object. 
-    	
-        InitialScreen initial = new InitialScreen();
-        
+    	Board board;
+        InitialScreen initial = new InitialScreen(board);
         
         /*
         Scanner sc = new Scanner(System.in);

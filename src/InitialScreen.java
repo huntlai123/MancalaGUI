@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class InitialScreen extends JFrame
@@ -8,8 +9,16 @@ public class InitialScreen extends JFrame
         JPanel panel = new JPanel();
         
         JTextField input = new JTextField();
-        JButton play = new JButton("Play");
+        JButton play = new JButton("Next");
         JTextArea prompt = new JTextArea("Number of Stones(3 or 4):");
+        
+        play.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        StyleScreen styleChoice = new StyleScreen();
+                    }
+                });
         
         panel.add(prompt);
         panel.add(input);
@@ -23,4 +32,6 @@ public class InitialScreen extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+    
+    
 }
