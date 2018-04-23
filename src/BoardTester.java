@@ -1,5 +1,15 @@
 
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.Scanner;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
@@ -7,11 +17,14 @@ import java.util.Scanner;
  */
 public class BoardTester {
 
+    private static Board board;
+    private static BoardPanel panel;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	
+    	  
+        initialScreen();
     	// BoardFrame myFrame = new BoardFrame(); // Reference to board
 		
 		// Create reference to buttons/textfields that will take input from user
@@ -29,8 +42,6 @@ public class BoardTester {
 		// else if BoardStyle2 was chosen, initialize myStyle with BoardStyle2 with the chosen number of stones.
     	
     	// Declare and initialize Board object. Set references of listeners from Panel to Board object. 
-    	Board board;
-        InitialScreen initial = new InitialScreen(board);
         
         /*
         Scanner sc = new Scanner(System.in);
@@ -62,6 +73,74 @@ public class BoardTester {
         myBoard.updateBoard(4);  //testing
         System.out.println(myBoard.getCircularList());  //testing
         */
+    }
+    
+    public static void styleScreen()
+    {
+        JFrame frame = new JFrame();
+        JTextArea prompt = new JTextArea("Choose a Style:");
+        JButton rect = new JButton("Rectangle");
+        JButton circ = new JButton("Circle");
+        
+        rect.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        panel = new BoardPanel(new BoardStyleRectangle());
+                        frame.dispose();
+                    }  
+                });
+        
+        circ.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        panel = new BoardPanel(new BoardStyleCircle());
+                        frame.dispose();
+                    }
+                });
+
+        frame.add(prompt);
+        frame.add(rect);
+        frame.add(circ);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new FlowLayout());
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    
+    public static void initialScreen()
+    {
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        JTextField input = new JTextField();
+        JButton play = new JButton("Next");
+        JTextArea prompt = new JTextArea("Number of Stones(3 or 4):");
+        
+        play.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        board = new Board(Integer.parseInt(input.getText()));
+                        styleScreen();
+                        frame.dispose();
+                    }
+                });
+        
+        panel.add(prompt);
+        panel.add(input);
+        panel.add(play);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        frame.add(panel);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new FlowLayout());
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
     
 }

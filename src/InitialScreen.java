@@ -4,8 +4,11 @@ import javax.swing.*;
 
 public class InitialScreen extends JFrame
 {
-    InitialScreen()
+    private Board board;
+    
+    InitialScreen(Board board)
     {   
+        this.board = board;
         JPanel panel = new JPanel();
         
         JTextField input = new JTextField();
@@ -17,6 +20,7 @@ public class InitialScreen extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         StyleScreen styleChoice = new StyleScreen();
+                        board
                     }
                 });
         
