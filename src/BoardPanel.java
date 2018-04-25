@@ -12,20 +12,23 @@ public class BoardPanel extends JPanel
 {
 	private final int DEFAULT_WIDTH = 700;				//	Default width of the panel
 	private final int DEFAULT_HEIGHT = 500;				//	Default height of the panel
+	private final int NUM_OF_PITS = 14;
 	
 	private BoardStyle style;							//	Reference to BoardStyle object
-	private JLabel pitsLabel;
+	private Board model;								// 	Reference to Board(Model)
+	
+	private Pit[] pits;									//  Array of Pits
 	
 	/**
 	 *	Default constructor. Sets style to null and dimensions to their default values.
 	 */
-	BoardPanel()
+	public BoardPanel()
 	{
 		style = null;
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-		setLayout(new SpringLayout());
-		addComponents();
+		pits = new Pit[NUM_OF_PITS];
+		initializeMouseListener();
 	}
 	
 	/**
@@ -33,13 +36,13 @@ public class BoardPanel extends JPanel
 	 * 
 	 * @param _style BoardStyle object that will be referenced by instance variable.
 	 */
-	BoardPanel(BoardStyle _style)
+	public BoardPanel(BoardStyle _style)
 	{
 		style = _style;
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-		setLayout(new SpringLayout());
-		addComponents();
+		pits = new Pit[NUM_OF_PITS];
+		initializeMouseListener();
 	}
 	
 	/**
@@ -48,13 +51,23 @@ public class BoardPanel extends JPanel
 	 * @param _width The width of this BoardPanel
 	 * @param _height The height of this BoardPanel
 	 */
-	BoardPanel(BoardStyle _style, int width, int height)
+	public BoardPanel(BoardStyle _style, int width, int height)
 	{
 		style = _style;
 		setSize(width, height);
 		setPreferredSize(new Dimension(width, height));
-		setLayout(new SpringLayout());
-		addComponents();
+		pits = new Pit[NUM_OF_PITS];
+		initializeMouseListener();
+	}
+	
+	/**
+	 * Draws the style
+	 */
+	public void paintComponent(Graphics _pen)
+	{
+		super.paintComponent(_pen);
+		Graphics2D pen = (Graphics2D)_pen;
+		style.draw(pen, getWidth(), getHeight());
 	}
 	
 	/**
@@ -71,62 +84,25 @@ public class BoardPanel extends JPanel
 	public BoardStyle getBoardStyle()
 	{	return style;	}
 	
-	private void addComponents()
+	private void initializeMouseListener()
 	{
-		PitComponent[] pitArr = new PitComponent[12];
-		for (int i = 0; i < 12; i++)
-		{
-			pitArr[i] = new PitComponent(this);
-			
-			PitComponent curPit = pitArr[i];
-			
-			add(curPit);
-			
-			curPit.addMouseListener(new MouseListener()
-			{
-				public void mouseClicked(MouseEvent arg0)
+		addMouseListener(new MouseListener()
 				{
-					// Notify corresponding pit in Model
-					Point mousePoint = arg0.getPoint();
-					if (curPit.contains(mousePoint))
+					public void mouseClicked(MouseEvent mEvent) 
 					{
-						System.out.println("test");
+						Point MousePoint = mEvent.getPoint();
+						for (int i = 0; i < pits.length; i++)
+						{
+							if (pits[i].contains(MousePoint))
+							{
+								model.updateBoard(pits[i].getPitNum());
+							}
+						}
 					}
-				}
-				public void mouseEntered(MouseEvent arg0) {}
-				public void mouseExited(MouseEvent arg0) {}
-				public void mousePressed(MouseEvent arg0) {}
-				public void mouseReleased(MouseEvent arg0) {}
-			});
-			
-			SpringLayout layout = (SpringLayout)getLayout();
-			if (i == 0)
-			{
-				layout.putConstraint(SpringLayout.WEST, pitArr[i], 2*(int)((getWidth() * .27)/9) + (int)pitArr[i].getDiameter(), SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.SOUTH, pitArr[i], (int)(getHeight() * 0.15), SpringLayout.SOUTH, this);
-			}
-			else if (i > 0 && i <= 5)
-			{
-				layout.putConstraint(SpringLayout.WEST, pitArr[i], (int)((getWidth() * .27)/9) + (int)pitArr[i].getDiameter(), SpringLayout.WEST, pitArr[i-1]);
-				layout.putConstraint(SpringLayout.SOUTH, pitArr[i], (int)(getHeight() * 0.15), SpringLayout.SOUTH, this);
-			}
-			else if (i == 6)
-			{
-				layout.putConstraint(SpringLayout.WEST, pitArr[i], 2*(int)((getWidth() * .27)/9) + (int)pitArr[i].getDiameter(), SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.SOUTH, pitArr[i], (int)(getHeight() - (getHeight() * 0.15) - pitArr[i].getDiameter()), SpringLayout.SOUTH, this);
-			}
-			else
-			{
-				layout.putConstraint(SpringLayout.WEST, pitArr[i], (int)((getWidth() * .27)/9) + (int)pitArr[i].getDiameter(), SpringLayout.WEST, pitArr[i-1]);
-				layout.putConstraint(SpringLayout.SOUTH, pitArr[i], (int)(getHeight() - (getHeight() * 0.15) - pitArr[i].getDiameter()), SpringLayout.SOUTH, this);
-			}
-		}
-	}
-	
-	public void paintComponent(Graphics _pen)
-	{
-		super.paintComponent(_pen);
-		Graphics2D pen = (Graphics2D)_pen;
-		style.draw(pen, getWidth(), getHeight());
+					public void mouseEntered(MouseEvent arg0) {}
+					public void mouseExited(MouseEvent arg0) {}
+					public void mousePressed(MouseEvent arg0) {}
+					public void mouseReleased(MouseEvent arg0) {}
+				});
 	}
 }
