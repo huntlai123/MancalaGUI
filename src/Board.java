@@ -9,6 +9,9 @@ public class Board {
     private int currHole = 0;   //current hole to receive stones
     private int lastTurn = 0;   //number of stones moved last turn
     
+    /**
+     * Default constructor. Builds an empty board. 
+     */
     public Board()
     {
         playerTurn = false;
@@ -23,6 +26,10 @@ public class Board {
         }
     }
     
+    /**
+     * Constructor that builds the board with the given number of stones
+     * @param stoneNum number of stones to be initialized with the board
+     */
     public Board(int stoneNum)
     {
          playerTurn = false;
@@ -59,14 +66,46 @@ public class Board {
             numStones--;
             lastTurn++;
         }
+        if (!takeAnotherTurn())
+            changePlayerTurn();
     }
     
     /**
      * Checks if the Mancala belongs to the current player or the opposing player. If it belongs to the 
      * current player, don't skip, otherwise skip over that Mancala
-     * @return 
+     * @return true if the current Mancala should be skipped
      */
     private boolean skipMancala()
+    {
+        if (currHole % 14 == 6 && playerTurn == true)
+            return true;
+        else if (currHole % 14 == 13 && playerTurn == false)
+            return true;
+        else
+            return false;
+    }
+    
+    /**
+     * Checks if the Mancala should have a stone removed when undoing a turn. It skips the Mancala of the 
+     * opposing player
+     * @return true if the current Mancala shouldn't be skipped
+     */
+    private boolean skipRetMancala()
+    {
+        if (currHole % 14 == 6 && playerTurn == false)
+            return true;
+        else if (currHole % 14 == 13 && playerTurn == true)
+            return true;
+        else
+            return false;
+    }
+    
+    /**
+     * Checks if the current player's can take another turn. Player must place final stone into their 
+     * own Mancala to make this happen.
+     * @return true if the last stone was placed in the current player's Mancala
+     */
+    private boolean takeAnotherTurn()
     {
         if (currHole % 14 == 6 && playerTurn == true)
             return true;
@@ -108,18 +147,21 @@ public class Board {
     public void undo()
     {
         int numStones = 0;
-        
+
         if (canUndo())
         {
             currHole++; //inc by 1 to avoid logic error in loop
             do{
                 currHole = (currHole + 13) % 14;    //decrements currHole pointer by 1
-                if (skipMancala())
+                lastTurn--;
+                if (skipRetMancala()){
+                    lastTurn++;
                     continue;
+                }
                 numStones++;
                 decArrVal(currHole);
                 
-                lastTurn--;
+                
             }while(lastTurn >= 0);
             numStones += holes.get(currHole); //finds current val and adds the stones to be restored
             holes.set(currHole, numStones); //restores stones
