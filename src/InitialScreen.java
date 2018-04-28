@@ -8,25 +8,24 @@ public class InitialScreen extends JFrame
     
     InitialScreen(Board board)
     {   
-        this.board = board;
         JPanel panel = new JPanel();
         
         JTextField input = new JTextField();
-        JButton play = new JButton("Next");
+        JButton next = new JButton("Next");
         JTextArea prompt = new JTextArea("Number of Stones(3 or 4):");
         
-        play.addActionListener(new ActionListener()
+        next.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
                     {
+                        this.board = new Board(Integer.parseInt(input.getText()));
                         StyleScreen styleChoice = new StyleScreen();
-                        board
                     }
                 });
         
         panel.add(prompt);
         panel.add(input);
-        panel.add(play);
+        panel.add(next);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         add(panel);
