@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,7 +11,7 @@ import java.awt.event.MouseListener;
  * @author DaleS
  *
  */
-public class BoardPanel extends JPanel
+public class BoardPanel extends JPanel implements ChangeListener
 {
 	private final int DEFAULT_WIDTH = 700;				//	Default width of the panel
 	private final int DEFAULT_HEIGHT = 500;				//	Default height of the panel
@@ -104,5 +107,10 @@ public class BoardPanel extends JPanel
 					public void mousePressed(MouseEvent arg0) {}
 					public void mouseReleased(MouseEvent arg0) {}
 				});
+	}
+	
+	public void stateChanged(ChangeEvent e)
+	{
+	    //NEEDS TO BE IMPLEMENTED
 	}
 }

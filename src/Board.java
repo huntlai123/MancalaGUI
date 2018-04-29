@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import javax.swing.event.ChangeListener;
+
 /**
  *
  */
@@ -8,6 +11,7 @@ public class Board {
     private CircularList<Integer> holes = null;    //ArrList used to represent the holes in the board including each player's Mancala
     private int currHole = 0;   //current hole to receive stones
     private int lastTurn = 0;   //number of stones moved last turn
+    private ArrayList<ChangeListener> listeners;
     
     /**
      * Default constructor. Builds an empty board. 
@@ -161,7 +165,6 @@ public class Board {
                 numStones++;
                 decArrVal(currHole);
                 
-                
             }while(lastTurn >= 0);
             numStones += holes.get(currHole); //finds current val and adds the stones to be restored
             holes.set(currHole, numStones); //restores stones
@@ -207,5 +210,10 @@ public class Board {
     public CircularList<Integer> getCircularList()
     {
         return holes;
+    }
+    
+    public void attach(ChangeListener l)
+    {
+        listeners.add(l);
     }
 }

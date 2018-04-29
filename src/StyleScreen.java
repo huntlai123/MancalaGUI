@@ -1,14 +1,26 @@
+/*
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class StyleScreen extends JFrame
 {
-    StyleScreen()
+    StyleScreen(Board board)
     {
         JTextArea prompt = new JTextArea("Choose a Style:");
         JButton rect = new JButton("Rectangle");
         JButton circ = new JButton("Circle");
+        
+        rect.addActionListener(
+                new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        
+                    }
+                }
+                
+                );
         
         add(prompt);
         add(rect);
@@ -22,3 +34,4 @@ public class StyleScreen extends JFrame
         setVisible(true);
     }
 }
+*/

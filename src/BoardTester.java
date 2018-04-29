@@ -88,6 +88,7 @@ public class BoardTester {
                     {
                         panel = new BoardPanel(new BoardStyleRectangle());
                         frame.dispose();
+                        board.attach(panel);
                     }  
                 });
         
@@ -97,6 +98,7 @@ public class BoardTester {
                     {
                         panel = new BoardPanel(new BoardStyleCircle());
                         frame.dispose();
+                        board.attach(panel);
                     }
                 });
 

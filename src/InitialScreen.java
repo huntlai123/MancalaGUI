@@ -1,11 +1,10 @@
+/*
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class InitialScreen extends JFrame
-{
-    private Board board;
-    
+{    
     InitialScreen(Board board)
     {   
         JPanel panel = new JPanel();
@@ -18,8 +17,9 @@ public class InitialScreen extends JFrame
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        this.board = new Board(Integer.parseInt(input.getText()));
-                        StyleScreen styleChoice = new StyleScreen();
+                        //board = new Board(Integer.parseInt(input.getText()));
+                        StyleScreen styleChoice = new StyleScreen(board);
+                        
                     }
                 });
         
@@ -35,6 +35,5 @@ public class InitialScreen extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-    
-    
 }
+*/
