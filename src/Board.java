@@ -219,11 +219,61 @@ public class Board {
     }
     
     /**
-     * Attaches the boardpanel change listener to the model
-     * @param l boardpanel change listener to be attached
+     * Attaches the BoardPanel change listener to the model
+     * @param l BoardPanel change listener to be attached
      */
     public void attach(ChangeListener l)
     {
         listeners.add(l);
+    }
+    
+    /**
+     * Checks if a player has no more stones on their side, if so the opposing player's pits are all
+     * added to their Mancala.
+     * @return true if either player has an empty side
+     */
+    public boolean endGame()
+    {
+        int counter1 = 0;   //counts player 1's side
+        int counter2 = 0;   //counts player 2's side
+        int sum = 0;        //sums stones to be added
+        for (int i = 0; i < 6; i++)     //checks if player 1's side is empty
+        {
+            if (holes.get(i) == 0)
+            {
+                counter1++;
+            }
+        }
+        for (int i = 7; i < 13; i++)    //checks if player 2's side is empty
+        {
+            if (holes.get(i) == 0)
+            {
+                counter2++;
+            }
+        }
+        
+        if(counter1 == 6)               //if player 1's side is empty, sum all stones in p2's side
+        {
+            for (int i = 7; i < 13; i++)
+            {
+                sum += holes.get(i);
+            }
+            sum += holes.get(13);
+            holes.set(13, sum); //set hole to have the sum of all the stones on this player's side
+            return true;
+        }
+        else if (counter2 == 6)         //if player 2's side is empty, sum all stones in p1's side
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                sum += holes.get(i);
+            }
+            sum += holes.get(6);
+            holes.set(6, sum); //set hole to have the sum of all the stones on this player's side
+            return true;
+        }
+        
+        else
+            return false;
     }
 }
