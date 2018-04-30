@@ -226,7 +226,7 @@ public class Board {
                     continue;
                 }
                 numStones++;
-                decArrVal(currHole);
+                decArrVal(currHole);                
                 
             }while(lastTurn >= 0);
             
@@ -287,7 +287,7 @@ public class Board {
     }
     
     /**
-     * Decrements the value at the given hole by 1
+     * Decrements the value at the given hole by 1. Updates ChangeListener.
      * @param i location of hole to be changed
      */
     private void decArrVal(int i)
@@ -295,6 +295,11 @@ public class Board {
         Integer value = holes.get(i);
         value--;
         holes.set(i, value);
+        for (ChangeListener l : listeners)
+        {
+            l.stateChanged(new ChangeEvent(this));
+         
+        }
     }
     
     /**
