@@ -32,7 +32,7 @@ public class BoardStyleCircle implements BoardStyle
         
         for(int i = 0; i < 6; i++)
             ellipses[i] = new Ellipse2D.Double((i+5)*edgeWidth + i*diameter, rowOneHeight, diameter, diameter);
-        ellipses[6] = new Ellipse2D.Double(edgeWidth, rowTwoHeight,diameter, personalPitLength);
+        ellipses[6] = new Ellipse2D.Double(8*edgeWidth + 7*diameter, rowTwoHeight,diameter, personalPitLength);
         
         int j = 0;  //used to access the lower row's x value
         
@@ -43,7 +43,7 @@ public class BoardStyleCircle implements BoardStyle
             j += 2;
             ellipses[i]= new Ellipse2D.Double((ellipses[i-j].getX()), rowTwoHeight, diameter, diameter);
         }
-        ellipses[13] = new Ellipse2D.Double(8*edgeWidth + 7*diameter, rowTwoHeight, diameter, personalPitLength);
+        ellipses[13] = new Ellipse2D.Double(edgeWidth, rowTwoHeight, diameter, personalPitLength);
 
         Pit[] pits = new Pit[14];
         
