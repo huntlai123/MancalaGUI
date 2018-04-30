@@ -23,21 +23,27 @@ public class BoardStyleCircle implements BoardStyle
         double diameter = (width * .73)/8;
         double edgeWidth = (width * .27)/9;
         double personalPitLength = height * .7;
-        double rowOneHeight = height * .15;
+        double rowTwoHeight = height * .15; //top
+        double rowOneHeight = height - rowTwoHeight - diameter; //bottom
         
         Ellipse2D.Double[] ellipses = new Ellipse2D.Double[14];
         
         //Row 1 and personal pit 1
-        ellipses[0] = new Ellipse2D.Double(edgeWidth, rowOneHeight,diameter, personalPitLength);
-        for(int i = 1; i < 7; i++)
-            ellipses[i] = new Ellipse2D.Double(((i+1)*edgeWidth) + (i*diameter), rowOneHeight, diameter, diameter);
-       
-        double rowTwoHeight = height - rowOneHeight - diameter;
+        
+        for(int i = 0; i < 6; i++)
+            ellipses[i] = new Ellipse2D.Double((i+5)*edgeWidth + i*diameter, rowOneHeight, diameter, diameter);
+        ellipses[6] = new Ellipse2D.Double(edgeWidth, rowTwoHeight,diameter, personalPitLength);
+        
+        int j = 0;  //used to access the lower row's x value
         
         //Row 2 and personal pit 2
-        ellipses[7] = new Ellipse2D.Double(8*edgeWidth + 7*diameter, rowOneHeight, diameter, personalPitLength);
-        for(int i = 1; i < 7; i++)
-            ellipses[i + 7]= new Ellipse2D.Double((i+1)*edgeWidth + (i*diameter), rowTwoHeight, diameter, diameter);
+        
+        for(int i = 7; i < 13; i++)
+        {
+            j += 2;
+            ellipses[i]= new Ellipse2D.Double((ellipses[i-j].getX()), rowTwoHeight, diameter, diameter);
+        }
+        ellipses[13] = new Ellipse2D.Double(8*edgeWidth + 7*diameter, rowTwoHeight, diameter, personalPitLength);
 
         Pit[] pits = new Pit[14];
         
