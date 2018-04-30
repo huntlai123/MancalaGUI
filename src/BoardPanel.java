@@ -77,6 +77,9 @@ public class BoardPanel extends JPanel implements ChangeListener
 		CircularList<Integer> pitValues = model.getCircularList();
 		for(int i = 0; i < pitValues.size(); i++)
 		{
+		    pen.setColor(style.getFillColor());
+		    pen.fill(pits[i].getShape());
+		    pen.setColor(style.getBorderColor());
 		    pen.draw(pits[i].getShape());
 		    pen.drawString(Integer.toString(pitValues.get(i)), 
 		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());		    
@@ -111,9 +114,7 @@ public class BoardPanel extends JPanel implements ChangeListener
                                         {
                                                 if (pits[i].contains(MousePoint) && model.allowMove(pits[i].getPitNum()))
                                                 {                                                    
-                                                        model.updateBoard(pits[i].getPitNum());
-                                                        repaint();
-                                                        
+                                                        model.updateBoard(pits[i].getPitNum());                                                        
                                                 }
                                         }
                                         if (model.endGame())

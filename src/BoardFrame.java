@@ -5,17 +5,17 @@ public class BoardFrame extends JFrame
 {
     BoardFrame(BoardPanel panel)
     {
-        JButton reset = new JButton("Reset "+panel.getUndoCount());
-        reset.setBounds(1, 1, 100, 50);
+        JButton undo = new JButton("Undo "+panel.getUndoCount());
+        undo.setBounds(1, 1, 100, 50);
         
-        reset.addActionListener(event ->
+        undo.addActionListener(event ->
         {
             repaint();
-            reset.setText("Reset "+panel.getUndoCount());
+            undo.setText("Undo "+panel.getUndoCount());
             panel.undoLast();
             repaint();
         });
-        add(reset);
+        add(undo);
         add(panel);
         setVisible(true);
         setTitle("Mancala");

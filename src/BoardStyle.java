@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 /**
@@ -14,5 +15,7 @@ public interface BoardStyle
      * @return Pit array that will be drawn to the panel or frame
      */
     public Pit[] createPits(Graphics2D g, int width, int height);
+    public Color getFillColor();
+    public Color getBorderColor();
 }
 

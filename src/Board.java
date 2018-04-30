@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
@@ -91,6 +93,7 @@ public class Board {
         if (undoCounter1 == 3)
             playerTurn = false;
         
+        notifyListeners();
     }
     
     /**
@@ -263,6 +266,7 @@ public class Board {
 //        System.out.println(playerTurn == false && twoCanUndo() && undoCounter2 == 2);
 //        System.out.println("player turn after everything = " + playerTurn);
         
+        notifyListeners();
     }
     
     /**
@@ -470,5 +474,13 @@ public class Board {
             return "Player 1 Wins! Congrats!";
         else 
             return "Player 2 Wins! Congrats!";
+    }
+    
+    public void notifyListeners()
+    {
+        for(ChangeListener l : listeners)
+        {
+            l.stateChanged(new ChangeEvent(this));
+        }
     }
 }
