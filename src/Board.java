@@ -204,16 +204,24 @@ public class Board {
     public boolean getPlayerTurn(){return playerTurn;}
     
     /**
-     * 
+     * Gets the number of undos for the current player
      * @return the number of undos left for this player's turn
      */
     public int getUndoCounter(){return undoCounter;}
     
+    /**
+     * Gets the circular ArrayList for the holes
+     * @return the pit ArrayList
+     */
     public CircularList<Integer> getCircularList()
     {
         return holes;
     }
     
+    /**
+     * Attaches the boardpanel change listener to the model
+     * @param l boardpanel change listener to be attached
+     */
     public void attach(ChangeListener l)
     {
         listeners.add(l);

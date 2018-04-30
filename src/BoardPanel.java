@@ -110,6 +110,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 							if (pits[i].contains(MousePoint))
 							{
 								model.updateBoard(pits[i].getPitNum());
+                                                                repaint();
 							}
 						}
 					}
