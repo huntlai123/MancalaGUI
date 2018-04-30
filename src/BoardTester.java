@@ -1,7 +1,6 @@
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.event.WindowEvent;
 import java.util.Scanner;
 import javax.swing.BoxLayout;
@@ -78,12 +77,14 @@ public class BoardTester {
     public static void createBoard()
     {
         BoardFrame frame = new BoardFrame(panel);
+        frame.setSize(700, 500);
     }
     
     public static void styleScreen()
     {
         JFrame frame = new JFrame();
         JTextArea prompt = new JTextArea("Choose a Style:");
+        prompt.setEditable(false);
         JButton rect = new JButton("Rectangle");
         JButton circ = new JButton("Circle");
         
@@ -119,6 +120,8 @@ public class BoardTester {
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        rect.requestFocusInWindow();
+        rect.requestFocus(true);
     }
     
     public static void initialScreen()
@@ -128,6 +131,8 @@ public class BoardTester {
         JTextField input = new JTextField();
         JButton play = new JButton("Next");
         JTextArea prompt = new JTextArea("Number of Stones(3 or 4):");
+        prompt.setEditable(false);
+
         
         play.addActionListener(new ActionListener()
                 {
@@ -139,17 +144,36 @@ public class BoardTester {
                     }
                 });
         
+        input.addKeyListener(new KeyAdapter() 
+        {
+            public void keyPressed(KeyEvent e)
+            {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    board = new Board(Integer.parseInt(input.getText()));
+                    styleScreen();
+                        frame.dispose();
+                }
+                        
+            }
+        });
+        
+        
+        
         panel.add(prompt);
         panel.add(input);
         panel.add(play);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
+        
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new FlowLayout());
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        input.requestFocusInWindow();
+        input.requestFocus(true);
     }
     
 }
