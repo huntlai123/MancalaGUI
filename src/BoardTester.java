@@ -76,7 +76,7 @@ public class BoardTester {
     
     public static void createBoard()
     {
-        BoardFrame frame = new BoardFrame(panel);
+        BoardFrame frame = new BoardFrame(panel, board);
         frame.setSize(700, 500);
     }
     
