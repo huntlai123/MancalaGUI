@@ -1,10 +1,10 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.*;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 /**
  * Board Panel
@@ -96,31 +96,34 @@ public class BoardPanel extends JPanel implements ChangeListener
 	 * @return
 	 */
 	public BoardStyle getBoardStyle()
-	{	return style;	}
-	
-	private void initializeMouseListener()
+	{	return style;	}	
+        
+        /**
+         * Attaches a mouse action listener to the controller
+         */
+        private void initializeMouseListener()
 	{
-		addMouseListener(new MouseListener()
-				{
-					public void mouseClicked(MouseEvent mEvent) 
-					{
-						Point MousePoint = mEvent.getPoint();
-						for (int i = 0; i < pits.length; i++)
-						{
-							if (pits[i].contains(MousePoint))
-							{
-								model.updateBoard(pits[i].getPitNum());
-                                                                repaint();
-							}
-						}
-					}
-					public void mouseEntered(MouseEvent arg0) {}
-					public void mouseExited(MouseEvent arg0) {}
-					public void mousePressed(MouseEvent arg0) {}
-					public void mouseReleased(MouseEvent arg0) {}
-				});
+		addMouseListener(new MouseAdapter()
+                        {
+                                public void mouseClicked(MouseEvent mEvent) 
+                                {
+                                        Point MousePoint = mEvent.getPoint();
+                                        for (int i = 0; i < pits.length; i++)
+                                        {
+                                                if (pits[i].contains(MousePoint))
+                                                {
+                                                        model.updateBoard(pits[i].getPitNum());
+                                                        repaint();
+                                                }
+                                        }
+                                }					
+                        });
 	}
 	
+        /**
+         * Repaints the board if the state has changed
+         * @param e event to have happened
+         */
 	public void stateChanged(ChangeEvent e)
 	{
 	    repaint();
