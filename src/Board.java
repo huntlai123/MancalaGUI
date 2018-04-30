@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -94,6 +95,7 @@ public class Board {
             playerTurn = false;
         
         notifyListeners();
+
     }
     
     /**
@@ -171,7 +173,7 @@ public class Board {
     }
     
     /**
-     * Increments the value at the given hole by 1. 
+     * Increments the value at the given hole by 1. Updates ChangeListener.
      * @param i location of hole to be changed
      */
     private void incArrVal(int i)
@@ -179,6 +181,13 @@ public class Board {
         Integer value = holes.get(i);
         value++;
         holes.set(i, value);
+        
+        holes.set(i, value);
+        for (ChangeListener l : listeners)
+        {
+            l.stateChanged(new ChangeEvent(this));
+         
+        }
     }
     
     /**
@@ -220,7 +229,7 @@ public class Board {
                     continue;
                 }
                 numStones++;
-                decArrVal(currHole);
+                decArrVal(currHole);                
                 
             }while(lastTurn >= 0);
             
@@ -282,7 +291,7 @@ public class Board {
     }
     
     /**
-     * Decrements the value at the given hole by 1
+     * Decrements the value at the given hole by 1. Updates ChangeListener.
      * @param i location of hole to be changed
      */
     private void decArrVal(int i)
@@ -290,6 +299,11 @@ public class Board {
         Integer value = holes.get(i);
         value--;
         holes.set(i, value);
+        for (ChangeListener l : listeners)
+        {
+            l.stateChanged(new ChangeEvent(this));
+         
+        }
     }
     
     /**
