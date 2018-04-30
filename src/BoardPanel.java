@@ -110,8 +110,8 @@ public class BoardPanel extends JPanel implements ChangeListener
                                         Point MousePoint = mEvent.getPoint();
                                         for (int i = 0; i < pits.length; i++)
                                         {
-                                                if (pits[i].contains(MousePoint))
-                                                {
+                                                if (pits[i].contains(MousePoint) && model.allowMove(pits[i].getPitNum()))
+                                                {                                                    
                                                         model.updateBoard(pits[i].getPitNum());
                                                         repaint();
                                                 }
