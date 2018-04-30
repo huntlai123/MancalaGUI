@@ -4,19 +4,16 @@ import java.awt.geom.*;
 import java.awt.event.*;
 
 /**
- * 
- * @author Dale Christian Seen
- *
+ * Represents a pit object that will be made into an array. These pit objects will be used for either player's side to hold his/her stones.
  */
 public class Pit
 {
-	private RectangularShape myShape;		// The shape of the pit
-	
-	private int pitNum;						// The pit number of this pit. This value will be used to access corresponding index in circular array in Model
+	private RectangularShape myShape;		// The shape of the pit	
+	private int pitNum;				// The pit number of this pit. This value will be used to access corresponding index in circular array in Model
 	private boolean isPersonalPit;			// True if this pit is a player's score pit.
 	
 	/**
-	 * Default constructor
+	 * Default constructor that creates a basic pit object
 	 */
 	public Pit()
 	{
@@ -29,6 +26,8 @@ public class Pit
 	 * Constructor specifies the shape type and pit number
 	 * @param aShape The shape of this pit
 	 * @param aPitNum The pit number of this pit
+         * Precondition: RectangularShape object should not be null and the pitNum arg should hold a positive real number
+         * Postcondition: a pit object is created that can be used in the Mancala board
 	 */
 	public Pit(RectangularShape aShape, int aPitNum)
 	{
@@ -37,9 +36,11 @@ public class Pit
 		isPersonalPit = false;
 	}
 	
-	/**
-	 * Checks if the given mouse pointer is within this component's shape
-	 */
+        /**
+         * Checks if the given mouse pointer is within this component's shape
+         * @param P point location to be checked
+         * @return true if the shape contains the point
+         */
 	public boolean contains(Point P)
 	{
 		if(myShape.contains(P))
