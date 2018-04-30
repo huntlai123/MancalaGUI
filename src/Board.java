@@ -18,6 +18,7 @@ public class Board {
     private int lastTurn = 0;   //number of stones moved last turn
     private ArrayList<ChangeListener> listeners;
     private boolean justUndid = true; //if player undid without making a move
+    private boolean lastTurnFree = false;   //if player got to go again last turn
     
     /**
      * Default constructor. Builds an empty board. 
@@ -81,7 +82,7 @@ public class Board {
             lastTurn++;
             justUndid = false;
         }
-        
+        lastTurnFree = false;
         if (!takeAnotherTurn())
             changePlayerTurn();
         
@@ -158,11 +159,15 @@ public class Board {
     private boolean takeAnotherTurn()
     {
         if ((currHole % 14 == 6 && playerTurn == false))
+        {
+            lastTurnFree = true;
             return true;
-            
+        }    
         else if ((currHole % 14 == 13 && playerTurn == true))
+        {
+            lastTurnFree = true;
             return true;
-        
+        }
         else if (holes.get(currHole) == 0)
             return true;
             
@@ -207,7 +212,7 @@ public class Board {
         int numStones = 0;
         System.out.println("player turn before undo if = " + playerTurn);
         System.out.println("player undocounter before undo if = " + undoCounter2);
-        if ((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3) || ((playerTurn == true && undoCounter2 < 2) && (playerTurn == true && twoCanUndo())) && justUndid == false)
+        if ((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3) || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo())) && justUndid == false)
         {
             //System.out.println("last turn " + lastTurn + " items were moved");
             currHole++; //inc by 1 to avoid logic error in loop
@@ -258,6 +263,11 @@ public class Board {
 //                undoCounter1++;
 //            }
             justUndid = true;
+            if (lastTurnFree == true){
+                changePlayerTurn();
+                undoCounter2++;
+                undoCounter1++;
+            }
             
         }
         System.out.println("player turn after almost everything = " + playerTurn);
