@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -183,11 +181,6 @@ public class Board {
         holes.set(i, value);
         
         holes.set(i, value);
-        for (ChangeListener l : listeners)
-        {
-            l.stateChanged(new ChangeEvent(this));
-         
-        }
     }
     
     /**
@@ -299,11 +292,6 @@ public class Board {
         Integer value = holes.get(i);
         value--;
         holes.set(i, value);
-        for (ChangeListener l : listeners)
-        {
-            l.stateChanged(new ChangeEvent(this));
-         
-        }
     }
     
     /**
