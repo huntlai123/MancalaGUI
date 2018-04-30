@@ -114,8 +114,11 @@ public class BoardPanel extends JPanel implements ChangeListener
                                                 {                                                    
                                                         model.updateBoard(pits[i].getPitNum());
                                                         repaint();
+                                                        
                                                 }
                                         }
+                                        if (model.endGame())
+                                                endScreen();
                                 }					
                         });
 	}
@@ -128,4 +131,14 @@ public class BoardPanel extends JPanel implements ChangeListener
 	{
 	    repaint();
 	}
+        
+        private void endScreen()
+        {
+            JFrame frame = new JFrame();
+            frame.setBounds(this.getWidth(), this.getHeight(), 200, 200);
+            frame.setTitle("Game Over");
+            frame.add(new JTextField(model.getWinningPlayer()));
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+        }
 }

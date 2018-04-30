@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.event.ChangeListener;
 
 /**
@@ -74,6 +76,8 @@ public class Board {
         }
         if (!takeAnotherTurn())
             changePlayerTurn();
+        if (playerTurn != false && currHole >= 0 && currHole <= 5 || playerTurn != true && currHole >= 7 && currHole <= 12)
+            captureStones();
     }
     
     /**
@@ -108,15 +112,20 @@ public class Board {
     
     /**
      * Checks if the current player's can take another turn. Player must place final stone into their 
-     * own Mancala to make this happen.
-     * @return true if the last stone was placed in the current player's Mancala
+     * own Mancala or they must click on an empty pit to make this happen. 
+     * @return true if the last stone was placed in the current player's Mancala or if they clicked on an empty Mancala
      */
     private boolean takeAnotherTurn()
     {
-        if (currHole % 14 == 6 && playerTurn == true)
+        if (currHole % 14 == 6 && playerTurn == false)
             return true;
-        else if (currHole % 14 == 13 && playerTurn == false)
+            
+        else if (currHole % 14 == 13 && playerTurn == true)
             return true;
+        
+        else if (holes.get(currHole) == 0)
+            return true;
+            
         else
             return false;
     }
@@ -257,6 +266,7 @@ public class Board {
             for (int i = 7; i < 13; i++)
             {
                 sum += holes.get(i);
+                holes.set(i, 0);
             }
             sum += holes.get(13);
             holes.set(13, sum); //set hole to have the sum of all the stones on this player's side
@@ -267,6 +277,7 @@ public class Board {
             for (int i = 0; i < 6; i++)
             {
                 sum += holes.get(i);
+                holes.set(i, 0);
             }
             sum += holes.get(6);
             holes.set(6, sum); //set hole to have the sum of all the stones on this player's side
@@ -291,5 +302,47 @@ public class Board {
             return true;
         else
             return false;
+    }
+    
+    /**
+     * Used when a player sets their final stone in an empty Mancala, it gets that stone and all of the stones in the
+     * opposing player's stones in their opposing pit (the pit on the exact opposite side) and places all of the stones
+     * into the current player's Mancala.
+     */
+    public void captureStones()
+    {
+        if(holes.get(currHole) == 1 && holes.get(12 - currHole) != 0 
+                && currHole != 6 && currHole != 13)
+        {
+            int location = 12 - currHole;               //gets the location of the opposing player
+            int stones = holes.get(location) + 1; //gets stones from the opposing player + 1 from curr player's pit
+            
+            holes.set(location, 0);
+            holes.set(currHole, 0);
+            
+            
+            if(getPlayerTurn() == true)
+            {
+                stones += holes.get(6);
+                holes.set(6, stones);
+            }
+            else if (getPlayerTurn() == false)
+            {
+                stones += holes.get(13);
+                holes.set(13, stones);
+            }
+        }
+    }
+    
+    /**
+     * Checks which player won the game and produces a string that will display that.
+     * @return a string pertaining to the winning player
+     */
+    public String getWinningPlayer()
+    {
+        if (holes.get(6) > holes.get(13))
+            return "Player 1 Wins! Congrats!";
+        else 
+            return "Player 2 Wins! Congrats!";
     }
 }
