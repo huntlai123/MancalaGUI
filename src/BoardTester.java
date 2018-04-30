@@ -75,6 +75,11 @@ public class BoardTester {
         */
     }
     
+    public static void createBoard()
+    {
+        BoardFrame frame = new BoardFrame(panel);
+    }
+    
     public static void styleScreen()
     {
         JFrame frame = new JFrame();
@@ -86,9 +91,10 @@ public class BoardTester {
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        panel = new BoardPanel(new BoardStyleRectangle());
+                        panel = new BoardPanel(board, new BoardStyleRectangle());
                         frame.dispose();
                         board.attach(panel);
+                        createBoard();
                     }  
                 });
         
@@ -96,9 +102,10 @@ public class BoardTester {
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        panel = new BoardPanel(new BoardStyleCircle());
+                        panel = new BoardPanel(board, new BoardStyleCircle());
                         frame.dispose();
                         board.attach(panel);
+                        createBoard();
                     }
                 });
 

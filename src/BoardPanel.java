@@ -28,6 +28,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 	public BoardPanel()
 	{
 		style = null;
+		model = null;
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		pits = new Pit[NUM_OF_PITS];
@@ -39,9 +40,10 @@ public class BoardPanel extends JPanel implements ChangeListener
 	 * 
 	 * @param _style BoardStyle object that will be referenced by instance variable.
 	 */
-	public BoardPanel(BoardStyle _style)
+	public BoardPanel(Board model, BoardStyle _style)
 	{
 		style = _style;
+		this.model = model;
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		pits = new Pit[NUM_OF_PITS];
@@ -54,9 +56,10 @@ public class BoardPanel extends JPanel implements ChangeListener
 	 * @param _width The width of this BoardPanel
 	 * @param _height The height of this BoardPanel
 	 */
-	public BoardPanel(BoardStyle _style, int width, int height)
+	public BoardPanel(Board model, BoardStyle _style, int width, int height)
 	{
 		style = _style;
+		this.model = model;
 		setSize(width, height);
 		setPreferredSize(new Dimension(width, height));
 		pits = new Pit[NUM_OF_PITS];
@@ -70,7 +73,15 @@ public class BoardPanel extends JPanel implements ChangeListener
 	{
 		super.paintComponent(_pen);
 		Graphics2D pen = (Graphics2D)_pen;
-		style.draw(pen, getWidth(), getHeight());
+		pits = style.createPits(pen, getWidth(), getHeight());
+		CircularList<Integer> pitValues = model.getCircularList();
+		for(int i = 0; i < pitValues.size(); i++)
+		{
+		    pen.draw(pits[i].getShape());
+		    pen.drawString(Integer.toString(pitValues.get(i)), 
+		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());
+		    
+		}
 	}
 	
 	/**
@@ -111,6 +122,6 @@ public class BoardPanel extends JPanel implements ChangeListener
 	
 	public void stateChanged(ChangeEvent e)
 	{
-	    //NEEDS TO BE IMPLEMENTED
+	    repaint();
 	}
 }

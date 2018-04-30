@@ -17,7 +17,7 @@ public class BoardStyleRectangle implements BoardStyle
      * Precondition: width and height are positive integer values and g is a non-null Graphics2D object
      * Postcondition: an array of pit objects will be returned with a working draw method to draw the pits.
      */
-    public Pit[] draw(Graphics2D g, int width, int height)
+    public Pit[] createPits(Graphics2D g, int width, int height)
     {
         double diameter = (width * .73)/8;
         double edgeWidth = (width * .27)/9;

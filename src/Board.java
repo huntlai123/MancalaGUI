@@ -20,6 +20,7 @@ public class Board {
     {
         playerTurn = false;
         undoCounter = 0;
+        listeners = new ArrayList<ChangeListener>();
         holes = new CircularList<Integer>();   //in order to make this circular, need to extend arraylist or create our own circular array
         for (int i = 0; i < 14; i++)
         {
@@ -36,8 +37,9 @@ public class Board {
      */
     public Board(int stoneNum)
     {
-         playerTurn = false;
+        playerTurn = false;
         undoCounter = 0;
+        listeners = new ArrayList<ChangeListener>();
         holes = new CircularList<Integer>();   //in order to make this circular, need to extend arraylist or create our own circular array
         for (int i = 0; i < 14; i++)
         {

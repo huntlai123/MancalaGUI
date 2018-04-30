@@ -13,6 +13,6 @@ public interface BoardStyle
      * @param height used to determine the size of the components along with spacing within
      * @return Pit array that will be drawn to the panel or frame
      */
-    public Pit[] draw(Graphics2D g, int width, int height);
+    public Pit[] createPits(Graphics2D g, int width, int height);
 }
 
