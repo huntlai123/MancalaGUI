@@ -158,8 +158,6 @@ public class BoardTester {
             }
         });
         
-        
-        
         panel.add(prompt);
         panel.add(input);
         panel.add(play);

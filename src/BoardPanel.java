@@ -81,6 +81,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		    pen.fill(pits[i].getShape());
 		    pen.setColor(style.getBorderColor());
 		    pen.draw(pits[i].getShape());
+		    pen.setFont(new Font("TimesRoman", Font.BOLD, 24));  
 		    pen.drawString(Integer.toString(pitValues.get(i)), 
 		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());		    
 		}
