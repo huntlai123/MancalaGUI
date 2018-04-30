@@ -185,7 +185,7 @@ public class Board {
         value++;
         holes.set(i, value);
         
-        holes.set(i, value);
+        holes.set(i, value);    //redundant
     }
     
     /**
@@ -288,8 +288,20 @@ public class Board {
     public int getUndos()
     {
         if (playerTurn == false)
-            return (3 - undoCounter2);
-        else 
+        {
+            if (justUndid)
+                return (3 - undoCounter2);
+            else
+                return (3 - undoCounter1);
+        }
+        else if (playerTurn == true)
+        {
+            if(justUndid)
+                    return (3 - undoCounter1);
+            else
+                return (3 - undoCounter2);
+        }
+        else
             return (3 - undoCounter1);
     }
     
