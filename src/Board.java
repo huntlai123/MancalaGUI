@@ -276,4 +276,20 @@ public class Board {
         else
             return false;
     }
+    
+    /**
+     * Checks if the current move is allowed. It checks if the pit that is clicked is on the 
+     * pertaining player's side. 
+     * @param pitNum the number of the pit that is clicked
+     * @return false if a player doesn't click on one of their pits
+     */
+    public boolean allowMove(int pitNum)
+    {
+        if(pitNum >= 0 && pitNum <=5 && playerTurn == false)
+            return true;
+        else if (pitNum >= 7 && pitNum <= 12 && playerTurn == true)
+            return true;
+        else
+            return false;
+    }
 }
