@@ -79,8 +79,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		{
 		    pen.draw(pits[i].getShape());
 		    pen.drawString(Integer.toString(pitValues.get(i)), 
-		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());
-		    
+		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());		    
 		}
 	}
 	
@@ -140,5 +139,15 @@ public class BoardPanel extends JPanel implements ChangeListener
             frame.add(new JTextField(model.getWinningPlayer()));
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
+        }
+        
+        public void undoLast()
+        {
+            model.undo();
+        }
+        
+        public String getUndoCount()
+        {
+            return "("+model.getUndos()+")";
         }
 }
