@@ -2,8 +2,21 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.*;
 
+/**
+ * Represents a style for the Mancala program that uses rectangle components for the pits.
+ */
 public class BoardStyleRectangle implements BoardStyle
 {
+    /**
+     * Draw method that will be called to draw the rectangle pits being drawn in the frame. It specifies the size of the rectangles on each player's 
+     * side.
+     * @param g Graphics2D object that draws the rectangle components
+     * @param width used throughout this style to ensure consistent sizing
+     * @param height used throughout this style to ensure consistent sizing
+     * @return an array of pits to be drawn 
+     * Precondition: width and height are positive integer values and g is a non-null Graphics2D object
+     * Postcondition: an array of pit objects will be returned with a working draw method to draw the pits.
+     */
     public Pit[] draw(Graphics2D g, int width, int height)
     {
         double diameter = (width * .73)/8;
@@ -51,11 +64,19 @@ public class BoardStyleRectangle implements BoardStyle
         return pits;
     }
     
+    /**
+     * Gets the border color of the rectangle pits.
+     * @return color of the border
+     */
     public Color getBorderColor()
     {
         return Color.LIGHT_GRAY;
     }
         
+    /**
+     * Gets the color that will fill the rectangle pits.
+     * @return color of the pit
+     */
     public Color getFillColor()
     {
         return new Color(153, 79, 0);
