@@ -212,7 +212,7 @@ public class Board {
         int numStones = 0;
         System.out.println("player turn before undo if = " + playerTurn);
         System.out.println("player undocounter before undo if = " + undoCounter2);
-        if ((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3) || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo())) && justUndid == false)
+        if (((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3) || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo()))) && justUndid == false)
         {
             //System.out.println("last turn " + lastTurn + " items were moved");
             currHole++; //inc by 1 to avoid logic error in loop
@@ -236,16 +236,15 @@ public class Board {
             //changePlayerTurn();
             
             if (playerTurn == true)
-            {
-                undoCounter2++;
-                playerTurn = false;
-                
-            }
-            else if (playerTurn == false)
-            {
-                undoCounter1++;
-                playerTurn = true;
-            }
+        	{
+        		undoCounter2++;
+        		playerTurn = false;
+        	}
+        	else
+        	{
+        		undoCounter1++;
+        		playerTurn = true;
+        	}
             
             //System.out.println("undo counter (in undo)= " + undoCounter);
 //            if(undoCounter2 <= 3 && undoCounter2 >= 0)
@@ -322,7 +321,7 @@ public class Board {
      */
     private boolean oneCanUndo()
     {
-        playerTurn = false;
+    	playerTurn = false;
         System.out.println("1undoC1 = " +undoCounter1);
         System.out.println("1undoC2 = " +undoCounter2);
         if (playerTurn == false && undoCounter2 <= 2 ){
@@ -340,7 +339,7 @@ public class Board {
      */
     private boolean twoCanUndo()
     {
-        playerTurn = true;
+    	playerTurn = true;
         System.out.println("2undoC1 = " +undoCounter1);
         System.out.println("2undoC2 = " +undoCounter2);
         if (playerTurn == true && undoCounter1 <= 2){
