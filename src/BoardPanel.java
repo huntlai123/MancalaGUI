@@ -8,14 +8,14 @@ import java.awt.event.MouseEvent;
 
 /**
  * Board Panel
- * @author DaleS
+ * @author Fantastic Four
  *
  */
 public class BoardPanel extends JPanel implements ChangeListener
 {
 	private final int DEFAULT_WIDTH = 700;				//	Default width of the panel
 	private final int DEFAULT_HEIGHT = 500;				//	Default height of the panel
-	private final int NUM_OF_PITS = 14;
+	private final int NUM_OF_PITS = 14;					//  Default number of pits.
 	
 	private BoardStyle style;							//	Reference to BoardStyle object
 	private Board model;								// 	Reference to Board(Model)
@@ -101,10 +101,10 @@ public class BoardPanel extends JPanel implements ChangeListener
 	public BoardStyle getBoardStyle()
 	{	return style;	}	
         
-        /**
-         * Attaches a mouse action listener to the controller
-         */
-        private void initializeMouseListener()
+    /**
+    * Attaches a mouse action listener to the controller
+    */
+    private void initializeMouseListener()
 	{
 		addMouseListener(new MouseAdapter()
                         {
@@ -119,37 +119,49 @@ public class BoardPanel extends JPanel implements ChangeListener
                                                 }
                                         }
                                         if (model.endGame())
-                                                endScreen();
+                                        {
+                                        	endScreen();
+                                        }
                                 }					
                         });
 	}
 	
-        /**
-         * Repaints the board if the state has changed
-         * @param e event to have happened
-         */
+    /**
+    * Repaints the board if the state has changed
+    * @param e event to have happened
+    */
 	public void stateChanged(ChangeEvent e)
 	{
 	    repaint();
 	}
-        
-        private void endScreen()
-        {
-            JFrame frame = new JFrame();
-            frame.setBounds(this.getWidth(), this.getHeight(), 200, 200);
-            frame.setTitle("Game Over");
-            frame.add(new JTextField(model.getWinningPlayer()));
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        }
-        
-        public void undoLast()
-        {
-            model.undo();
-        }
-        
-        public String getUndoCount()
-        {
-            return "("+model.getUndos()+")";
-        }
+    
+	/**
+	 * Creates a frame notifying the player that the game has ended while displaying the winner.
+	 */
+    private void endScreen()
+    {
+    	JFrame frame = new JFrame();
+        frame.setBounds(this.getWidth(), this.getHeight(), 200, 200);
+        frame.setTitle("Game Over");
+        frame.add(new JTextField(model.getWinningPlayer()));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    
+    /**
+     * Calls the Board(Model)'s undo method.
+     */
+    public void undoLast()
+    {
+    	model.undo();
+    }
+    
+    /**
+     * Returns the number of undos left in String form
+     * @return String containing the number of undos left.
+     */
+    public String getUndoCount()
+    {
+    	return "("+model.getUndos()+")";
+    }
 }

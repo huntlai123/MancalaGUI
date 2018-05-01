@@ -10,8 +10,18 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Frame that uses BoardPanel, two JPanels, and JButton to create the UI of the game
+ * @author Fantastic Four
+ *
+ */
 public class BoardFrame extends JFrame
 {
+	/**
+	 * Creates a BoardFrame with the specified BoardPanel and Board objects.
+	 * @param panel BoardPanel object that displays the board game. Acts as both the controller and view.
+	 * @param board Board objects that acts as the model of the game.
+	 */
     BoardFrame(BoardPanel panel, Board board)
     {
         JPanel control = new JPanel();

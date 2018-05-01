@@ -7,6 +7,8 @@ import java.awt.geom.*;
  */
 public class BoardStyleRectangle implements BoardStyle
 {
+	private Color c;
+	
     /**
      * Draw method that will be called to draw the rectangle pits being drawn in the frame. It specifies the size of the rectangles on each player's 
      * side.

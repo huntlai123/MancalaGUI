@@ -12,12 +12,13 @@ import javax.swing.JTextField;
 
 
 /**
- *
+ *	
  */
 public class BoardTester {
 
-    private static Board board;
-    private static BoardPanel panel;
+    private static Board board;			// static reference to a Board (model)
+    private static BoardPanel panel;	// static reference to a BoardPanel with the chosen style
+    
     /**
      * @param args the command line arguments
      */
@@ -74,12 +75,19 @@ public class BoardTester {
         */
     }
     
+    /**
+     * Creates the Board Frame using the initialized panel and model.
+     */
     public static void createBoard()
     {
         BoardFrame frame = new BoardFrame(panel, board);
         frame.setSize(700, 500);
     }
     
+    /**
+     * Creates a frame that prompts the user to choose a board style then calls createBoard to create a board
+     * using the chosen style.
+     */
     public static void styleScreen()
     {
         JFrame frame = new JFrame();
@@ -124,6 +132,10 @@ public class BoardTester {
         rect.requestFocus(true);
     }
     
+    /**
+     * Creates the initial screen frame that prompts the user how many stones each pit will have in the beginning
+     * of the game.
+     */
     public static void initialScreen()
     {
         JFrame frame = new JFrame();

@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class Pit
 {
 	private RectangularShape myShape;		// The shape of the pit	
-	private int pitNum;				// The pit number of this pit. This value will be used to access corresponding index in circular array in Model
+	private int pitNum;						// The pit number of this pit. This value will be used to access corresponding index in circular array in Model
 	private boolean isPersonalPit;			// True if this pit is a player's score pit.
 	
 	/**
@@ -36,11 +36,11 @@ public class Pit
 		isPersonalPit = false;
 	}
 	
-        /**
-         * Checks if the given mouse pointer is within this component's shape
-         * @param P point location to be checked
-         * @return true if the shape contains the point
-         */
+    /**
+    * Checks if the given mouse pointer is within this Pit's shape
+    * @param P point location to be checked
+    * @return true if the shape contains the point
+    */
 	public boolean contains(Point P)
 	{
 		if(myShape.contains(P))

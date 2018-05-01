@@ -6,8 +6,8 @@ import java.awt.geom.*;
  */
 public class BoardStyleCircle implements BoardStyle
 {
-    private Color c;
-    
+	private Color c;
+	
     /**
      * Draw method that will be called to draw the circle pits into the frame. It specifies the size of the circles 
      * that will be drawn and the relative sizing to each other.

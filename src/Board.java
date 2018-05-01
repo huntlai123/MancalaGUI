@@ -8,17 +8,17 @@ import javax.swing.event.ChangeListener;
  *
  */
 public class Board {
-    private final int MAXUNDOS = 3; //maximum number of undos that a player can do
-    private boolean playerTurn; //false = player 1's turn, true = player 2's turn
-    private int undoCounter1;   //counter for player 2
-    private int undoCounter2;   //counter for player 1
-    private boolean resetUndo = false;   //tracks when the undo counter should reset
-    private CircularList<Integer> holes = null;    //ArrList used to represent the holes in the board including each player's Mancala
-    private int currHole = 0;   //current hole to receive stones
-    private int lastTurn = 0;   //number of stones moved last turn
+    private final int MAXUNDOS = 3; 					// maximum number of undos that a player can do
+    private boolean playerTurn; 						// false = player 1's turn, true = player 2's turn
+    private int undoCounter1;   						// counter for player 2
+    private int undoCounter2;   						// counter for player 1
+    private boolean resetUndo = false;   				// tracks when the undo counter should reset
+    private CircularList<Integer> holes = null;    		// ArrList used to represent the holes in the board including each player's Mancala
+    private int currHole = 0;   						// current hole to receive stones
+    private int lastTurn = 0;   						// number of stones moved last turn
     private ArrayList<ChangeListener> listeners;
-    private boolean justUndid = true; //if player undid without making a move
-    private boolean lastTurnFree = false;   //if player got to go again last turn
+    private boolean justUndid = true; 					// if player undid without making a move
+    private boolean lastTurnFree = false;   			// if player got to go again last turn
     
     /**
      * Default constructor. Builds an empty board. 
@@ -66,8 +66,8 @@ public class Board {
      */
     public void updateBoard(int holeNum)  //might need to add the initial hole as a param
     {
-        //logic: place stone in each hole starting from the hole after the chosen hole
-        //make sure to ignore the opposing player's Mancala        
+        // logic: place stone in each hole starting from the hole after the chosen hole
+        // make sure to ignore the opposing player's Mancala        
         currHole = holeNum; //gets the hole to add a stone into
         lastTurn = 0; //reset number of stones used in the turn
         int numStones = holes.get(currHole);    //take stones from this hole
@@ -282,8 +282,8 @@ public class Board {
     }
     
     /**
-     * Gets the number of undos left for this player's turn
-     * @return number of undos left
+     * Returns the number of undos left for the current player
+     * @return Number of undos left
      */
     public int getUndos()
     {
@@ -500,6 +500,9 @@ public class Board {
             return "Player 2 Wins! Congrats!";
     }
     
+    /**
+     * Notifies the listeners attached to this model so that viewers will be repainted
+     */
     public void notifyListeners()
     {
         for(ChangeListener l : listeners)

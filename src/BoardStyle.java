@@ -15,7 +15,17 @@ public interface BoardStyle
      * @return Pit array that will be drawn to the panel or frame
      */
     public Pit[] createPits(Graphics2D g, int width, int height);
+    
+    /**
+     * Get the fill color of the pits
+     * @return Color of pits
+     */
     public Color getFillColor();
+    
+    /**
+     * Get the border color of the pits
+     * @return Color of pits
+     */
     public Color getBorderColor();
 }
 
