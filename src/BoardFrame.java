@@ -37,16 +37,17 @@ public class BoardFrame extends JFrame
         {
             panel.undoLast();
             
-            // Updates the JLabels for both player1 and player2 undo counts when undo buttons is clicked
+            int currentUndos = board.getUndos();
+
             if (board.getPlayerTurn() == false)
             {
-            	player1UndoCount.setText("Player 1: " + board.getUndos() + "     ");
+            	player1UndoCount.setText("Player 1: " + currentUndos + "     ");
             	player2UndoCount.setText("Player 2: " + 3);
             }
-            else
+            else if (currentUndos > 0)
             {
-            	player2UndoCount.setText("Player 2: " + board.getUndos());
             	player1UndoCount.setText("Player 1: " + 3 + "     ");
+            	player2UndoCount.setText("Player 2: " + currentUndos);
             }
             
         });
@@ -55,16 +56,17 @@ public class BoardFrame extends JFrame
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-                    	// Updates the JLabels for both player1 and player2 when mouse is clicked
+                    	int currentUndos = board.getUndos();
+                    	
                     	if (board.getPlayerTurn() == true)
                         {
-                        	player1UndoCount.setText("Player 1: " + board.getUndos() + "     ");
+                        	player1UndoCount.setText("Player 1: " + currentUndos + "     ");
                         	player2UndoCount.setText("Player 2: " + 3);
                         }
-                        else
+                        else if (currentUndos > 0)
                         {
-                        	player2UndoCount.setText("Player 2: " + board.getUndos());
                         	player1UndoCount.setText("Player 1: " + 3 + "     ");
+                        	player2UndoCount.setText("Player 2: " + currentUndos);
                         }
                         revalidate();
                     }
