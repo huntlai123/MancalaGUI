@@ -83,10 +83,12 @@ public class BoardFrame extends JFrame
                     }
                 });
         
+        /**
         JTextArea player1 = new JTextArea("Player 1's Pit");
         JTextArea player2 = new JTextArea("Player 2's Pit");
         player1.setEditable(false);
         player2.setEditable(false);
+        **/
 
         control.add(playersTurn);
         control.add(undo);
@@ -96,9 +98,9 @@ public class BoardFrame extends JFrame
         control.add(player2UndoCount);
         
         boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.X_AXIS));
-        boardPanel.add(player1);
+        // boardPanel.add(player1);
         boardPanel.add(panel);
-        boardPanel.add(player2);
+        // boardPanel.add(player2);
         
         add(control);
         add(boardPanel);

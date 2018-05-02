@@ -4,6 +4,8 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.lang.Math;
 
 
 /**
@@ -67,7 +69,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 	}
 	
 	/**
-	 * Draws the style
+	 * Draws the style along with the label of each pit
 	 */
 	public void paintComponent(Graphics _pen)
 	{
@@ -75,6 +77,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		Graphics2D pen = (Graphics2D)_pen;
 		pits = style.createPits(pen, getWidth(), getHeight());
 		CircularList<Integer> pitValues = model.getCircularList();
+		
 		for(int i = 0; i < pitValues.size(); i++)
 		{
 		    pen.setColor(style.getFillColor());
@@ -85,6 +88,27 @@ public class BoardPanel extends JPanel implements ChangeListener
 		    pen.drawString(Integer.toString(pitValues.get(i)), 
 		            (int) pits[i].getShape().getCenterX(), (int) pits[i].getShape().getCenterY());		    
 		}
+		
+		pen.drawString("A1", (int)pits[0].getShape().getX() + (int)pits[0].getShape().getWidth()/4, (int)pits[0].getShape().getY() + (int)(pits[0].getShape().getHeight() * 1.5));
+		pen.drawString("A2", (int)pits[1].getShape().getX() + (int)pits[1].getShape().getWidth()/4, (int)pits[1].getShape().getY() + (int)(pits[1].getShape().getHeight() * 1.5));
+		pen.drawString("A3", (int)pits[2].getShape().getX() + (int)pits[2].getShape().getWidth()/4, (int)pits[2].getShape().getY() + (int)(pits[2].getShape().getHeight() * 1.5));
+		pen.drawString("A4", (int)pits[3].getShape().getX() + (int)pits[3].getShape().getWidth()/4, (int)pits[3].getShape().getY() + (int)(pits[3].getShape().getHeight() * 1.5));
+		pen.drawString("A5", (int)pits[4].getShape().getX() + (int)pits[4].getShape().getWidth()/4, (int)pits[4].getShape().getY() + (int)(pits[4].getShape().getHeight() * 1.5));
+		pen.drawString("A6", (int)pits[5].getShape().getX() + (int)pits[5].getShape().getWidth()/4, (int)pits[5].getShape().getY() + (int)(pits[5].getShape().getHeight() * 1.5));
+		
+		pen.drawString("Player 1 >>>", getWidth()/2 - getWidth()/10, (int)pits[2].getShape().getY() + (int)(pits[2].getShape().getHeight() * 2));
+		
+		pen.drawString("B1", (int)pits[7].getShape().getX() + (int)pits[7].getShape().getWidth()/4, (int)pits[7].getShape().getY() - (int)(pits[7].getShape().getHeight()/7));
+		pen.drawString("B2", (int)pits[8].getShape().getX() + (int)pits[8].getShape().getWidth()/4, (int)pits[8].getShape().getY() - (int)(pits[8].getShape().getHeight()/7));
+		pen.drawString("B3", (int)pits[9].getShape().getX() + (int)pits[9].getShape().getWidth()/4, (int)pits[9].getShape().getY() - (int)(pits[9].getShape().getHeight()/7));
+		pen.drawString("B4", (int)pits[10].getShape().getX() + (int)pits[10].getShape().getWidth()/4, (int)pits[10].getShape().getY() - (int)(pits[10].getShape().getHeight()/7));
+		pen.drawString("B5", (int)pits[11].getShape().getX() + (int)pits[11].getShape().getWidth()/4, (int)pits[11].getShape().getY() - (int)(pits[11].getShape().getHeight()/7));
+		pen.drawString("B6", (int)pits[12].getShape().getX() + (int)pits[12].getShape().getWidth()/4, (int)pits[12].getShape().getY() - (int)(pits[12].getShape().getHeight()/7));
+		
+		pen.drawString("<<< Player 2", getWidth()/2 - getWidth()/10, (int)pits[10].getShape().getY() - (int)(pits[10].getShape().getY()/1.8));
+		
+		pen.drawString("M1", (int)pits[6].getShape().getX() - getWidth()/17, (int)pits[6].getShape().getCenterY());
+		pen.drawString("M2", (int)pits[13].getShape().getX() + getWidth()/10, (int)pits[13].getShape().getCenterY());
 	}
 	
 	/**

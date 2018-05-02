@@ -31,7 +31,9 @@ public class BoardStyleCircle implements BoardStyle
         //Row 1 and personal pit 1
         
         for(int i = 0; i < 6; i++)
-            ellipses[i] = new Ellipse2D.Double((i+5)*edgeWidth + i*diameter, rowOneHeight, diameter, diameter);
+        {
+        	ellipses[i] = new Ellipse2D.Double((i+5)*edgeWidth + i*diameter, rowOneHeight, diameter, diameter);
+        }
         ellipses[6] = new Ellipse2D.Double(8*edgeWidth + 7*diameter, rowTwoHeight,diameter, personalPitLength);
         
         int j = 0;  //used to access the lower row's x value
