@@ -36,38 +36,17 @@ public class BoardFrame extends JFrame
         undo.addActionListener(event ->
         {
             panel.undoLast();
-            
-            int currentUndos = board.getUndos();
 
-            if (board.getPlayerTurn() == false)
-            {
-            	player1UndoCount.setText("Player A: " + currentUndos + "     ");
-            	player2UndoCount.setText("Player B: " + 3);
-            }
-            else if (currentUndos > 0)
-            {
-            	player1UndoCount.setText("Player A: " + 3 + "     ");
-            	player2UndoCount.setText("Player B: " + currentUndos);
-            }
-            
         });
         
         board.attach(new ChangeListener()
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-                    	int currentUndos = board.getUndos();
-                    	
-                    	if (board.getPlayerTurn() == true)
-                        {
-                        	player1UndoCount.setText("Player A: " + currentUndos + "     ");
-                        	player2UndoCount.setText("Player B: " + 3);
-                        }
-                        else if (currentUndos > 0)
-                        {
-                        	player1UndoCount.setText("Player A: " + 3 + "     ");
-                        	player2UndoCount.setText("Player B: " + currentUndos);
-                        }
+
+                        player1UndoCount.setText("Player 1: " + board.getUndoCounter1());
+                        player2UndoCount.setText("Player 2: " + board.getUndoCounter2());
+                        
                         revalidate();
                     }
                 });

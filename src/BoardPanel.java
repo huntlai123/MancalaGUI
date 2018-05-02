@@ -184,8 +184,10 @@ public class BoardPanel extends JPanel implements ChangeListener
      * Returns the number of undos left in String form
      * @return String containing the number of undos left.
      */
+    /**
     public String getUndoCount()
     {
     	return "("+model.getUndos()+")";
     }
+    **/
 }
