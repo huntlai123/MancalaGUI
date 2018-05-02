@@ -88,10 +88,15 @@ public class Board {
         
         if (playerTurn != false && currHole >= 0 && currHole <= 5 || playerTurn != true && currHole >= 7 && currHole <= 12)
             captureStones();
+        
         if (undoCounter2 == 3)
-            playerTurn = true;
+        {        	
+        	playerTurn = true;
+        }
         if (undoCounter1 == 3)
-            playerTurn = false;
+        {        	
+        	playerTurn = false;
+        }
         
         notifyListeners();
 

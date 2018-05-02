@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -26,19 +27,45 @@ public class BoardFrame extends JFrame
     {
         JPanel control = new JPanel();
         JPanel boardPanel = new JPanel();
-        JButton undo = new JButton("Undo "+panel.getUndoCount());
+        JButton undo = new JButton("Undo");
+        
+        JLabel undoLabel = new JLabel("Undo(s) left: ");
+        JLabel player1UndoCount = new JLabel("Player 1: 3     ");
+        JLabel player2UndoCount = new JLabel("Player 2: 3");
         
         undo.addActionListener(event ->
         {
-            undo.setText("Undo " + board.getUndos());
             panel.undoLast();
+            
+            // Updates the JLabels for both player1 and player2 undo counts when undo buttons is clicked
+            if (board.getPlayerTurn() == false)
+            {
+            	player1UndoCount.setText("Player 1: " + board.getUndos() + "     ");
+            	player2UndoCount.setText("Player 2: " + 3);
+            }
+            else
+            {
+            	player2UndoCount.setText("Player 2: " + board.getUndos());
+            	player1UndoCount.setText("Player 1: " + 3 + "     ");
+            }
+            
         });
         
         board.attach(new ChangeListener()
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-                        undo.setText("Undo " + board.getUndos());
+                    	// Updates the JLabels for both player1 and player2 when mouse is clicked
+                    	if (board.getPlayerTurn() == true)
+                        {
+                        	player1UndoCount.setText("Player 1: " + board.getUndos() + "     ");
+                        	player2UndoCount.setText("Player 2: " + 3);
+                        }
+                        else
+                        {
+                        	player2UndoCount.setText("Player 2: " + board.getUndos());
+                        	player1UndoCount.setText("Player 1: " + 3 + "     ");
+                        }
                         revalidate();
                     }
                 });
@@ -61,6 +88,10 @@ public class BoardFrame extends JFrame
 
         control.add(playersTurn);
         control.add(undo);
+        
+        control.add(undoLabel);
+        control.add(player1UndoCount);
+        control.add(player2UndoCount);
         
         boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.X_AXIS));
         boardPanel.add(player1);
