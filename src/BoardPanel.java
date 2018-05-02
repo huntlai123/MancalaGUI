@@ -107,8 +107,8 @@ public class BoardPanel extends JPanel implements ChangeListener
 		
 		pen.drawString("<<< Player 2", getWidth()/2 - getWidth()/10, (int)pits[10].getShape().getY() - (int)(pits[10].getShape().getY()/1.8));
 		
-		pen.drawString("M1", (int)pits[6].getShape().getX() - getWidth()/17, (int)pits[6].getShape().getCenterY());
-		pen.drawString("M2", (int)pits[13].getShape().getX() + getWidth()/10, (int)pits[13].getShape().getCenterY());
+		pen.drawString("MA", (int)pits[6].getShape().getX() - getWidth()/12, (int)pits[6].getShape().getCenterY());
+		pen.drawString("MB", (int)pits[13].getShape().getX() + getWidth()/10, (int)pits[13].getShape().getCenterY());
 	}
 	
 	/**

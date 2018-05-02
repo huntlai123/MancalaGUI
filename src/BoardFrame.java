@@ -30,8 +30,8 @@ public class BoardFrame extends JFrame
         JButton undo = new JButton("Undo");
         
         JLabel undoLabel = new JLabel("Undo(s) left: ");
-        JLabel player1UndoCount = new JLabel("Player 1: 3     ");
-        JLabel player2UndoCount = new JLabel("Player 2: 3");
+        JLabel player1UndoCount = new JLabel("Player A: 3     ");
+        JLabel player2UndoCount = new JLabel("Player B: 3");
         
         undo.addActionListener(event ->
         {
@@ -41,13 +41,13 @@ public class BoardFrame extends JFrame
 
             if (board.getPlayerTurn() == false)
             {
-            	player1UndoCount.setText("Player 1: " + currentUndos + "     ");
-            	player2UndoCount.setText("Player 2: " + 3);
+            	player1UndoCount.setText("Player A: " + currentUndos + "     ");
+            	player2UndoCount.setText("Player B: " + 3);
             }
             else if (currentUndos > 0)
             {
-            	player1UndoCount.setText("Player 1: " + 3 + "     ");
-            	player2UndoCount.setText("Player 2: " + currentUndos);
+            	player1UndoCount.setText("Player A: " + 3 + "     ");
+            	player2UndoCount.setText("Player B: " + currentUndos);
             }
             
         });
@@ -60,25 +60,25 @@ public class BoardFrame extends JFrame
                     	
                     	if (board.getPlayerTurn() == true)
                         {
-                        	player1UndoCount.setText("Player 1: " + currentUndos + "     ");
-                        	player2UndoCount.setText("Player 2: " + 3);
+                        	player1UndoCount.setText("Player A: " + currentUndos + "     ");
+                        	player2UndoCount.setText("Player B: " + 3);
                         }
                         else if (currentUndos > 0)
                         {
-                        	player1UndoCount.setText("Player 1: " + 3 + "     ");
-                        	player2UndoCount.setText("Player 2: " + currentUndos);
+                        	player1UndoCount.setText("Player A: " + 3 + "     ");
+                        	player2UndoCount.setText("Player B: " + currentUndos);
                         }
                         revalidate();
                     }
                 });
         
-        JTextArea playersTurn = new JTextArea(board.getPlayerTurn() ? "Player 2's turn" : "Player 1's turn");
+        JTextArea playersTurn = new JTextArea(board.getPlayerTurn() ? "Player B's turn" : "Player A's turn");
         playersTurn.setEditable(false);
         board.attach(new ChangeListener()
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-                        playersTurn.setText(board.getPlayerTurn() ? "Player 2's turn" : "Player 1's turn");
+                        playersTurn.setText(board.getPlayerTurn() ? "Player B's turn" : "Player A's turn");
                         revalidate();
                     }
                 });

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 /**
  *	
  */
-public class BoardTester {
+public class MancalaTest {
 
     private static Board board;			// static reference to a Board (model)
     private static BoardPanel panel;	// static reference to a BoardPanel with the chosen style
