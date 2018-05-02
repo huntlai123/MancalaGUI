@@ -289,6 +289,7 @@ public class Board {
      * Returns the number of undos left for the current player
      * @return Number of undos left
      */
+    /**
     public int getUndos()
     {
         if (playerTurn == false)
@@ -307,6 +308,25 @@ public class Board {
         }
         else
             return (3 - undoCounter1);
+    }
+    **/
+    
+    /**
+     * Gets the number of undos used by player 1
+     * @return the number of undos used by player 1
+     */
+    public int getUndoCounter1()
+    {
+    	return (3 - undoCounter2);
+    }
+    
+    /**
+     * Gets the number of undos used by player 2
+     * @return the nnumber of undos used by player 2
+     */
+    public int getUndoCounter2()
+    {
+    	return (3 - undoCounter1);
     }
     
     /**
@@ -379,18 +399,6 @@ public class Board {
      * @return false for player 1, true for player 2
      */
     public boolean getPlayerTurn(){return playerTurn;}
-    
-    /**
-     * Gets the number of undos used for the current player
-     * @return the number of undos useed on this player's turn
-     */
-    public int getUndoCounter()
-    {
-        if (playerTurn == false)
-            return undoCounter2;
-        else 
-            return undoCounter1;
-    }
     
     /**
      * Gets the circular ArrayList for the holes
