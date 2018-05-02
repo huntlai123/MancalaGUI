@@ -61,7 +61,7 @@ public class BoardStyleCircle implements BoardStyle
      */
     public Color getBorderColor()
     {
-        return Color.LIGHT_GRAY;
+        return new Color(112, 119, 113);
     }
     
     /**
@@ -70,6 +70,6 @@ public class BoardStyleCircle implements BoardStyle
      */
     public Color getFillColor()
     {
-        return new Color(153, 79, 0);
+        return new Color(23, 232, 68);
     }
 }

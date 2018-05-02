@@ -35,7 +35,7 @@ public class BoardFrame extends JFrame
         
         undo.addActionListener(event ->
         {
-            panel.undoLast();
+            board.undo();
 
         });
         
@@ -43,10 +43,8 @@ public class BoardFrame extends JFrame
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-
-                        player1UndoCount.setText("Player 1: " + board.getUndoCounter1());
-                        player2UndoCount.setText("Player 2: " + board.getUndoCounter2());
-                        
+                        player1UndoCount.setText("Player A: " + board.getUndoCounter1());
+                        player2UndoCount.setText("Player B: " + board.getUndoCounter2());
                         revalidate();
                     }
                 });

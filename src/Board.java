@@ -322,7 +322,7 @@ public class Board {
     
     /**
      * Gets the number of undos used by player 2
-     * @return the nnumber of undos used by player 2
+     * @return the number of undos used by player 2
      */
     public int getUndoCounter2()
     {
