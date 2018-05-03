@@ -146,18 +146,16 @@ public class Board {
      * Returns the number of undoes left for player A.
      * @return the number of undoes left for player A.
      */
-    /*
     public int getUndoCounter1()
     {	return undoCounter1;	}
-    */
+    
     /**
      * Returns the number of undoes left for player B.
      * @return the number of undoes left for player B.
      */
-    /*
     public int getUndoCounter2()
     {	return undoCounter2;	}
-    */
+    
     /**
      * Takes the number of stones in the given hole and distributes them to every
      * hole after it. Ignores the opposing player's Mancala
@@ -185,11 +183,6 @@ public class Board {
             numStones--;
             justUndid = false;
         }
-
-        lastTurnFree = false;
-        boolean anotherTurn = takeAnotherTurn();
-        if (!anotherTurn)
-            changePlayerTurn();
         
         lastTurnFree = takeAnotherTurn();
         
@@ -203,15 +196,6 @@ public class Board {
         	captureStones();
         }
         
-
-        if (undoCounter2 == 3 && !anotherTurn)
-        {        	
-        	playerTurn = true;
-        }
-        if (undoCounter1 == 3 && !anotherTurn)
-        {        	
-        	playerTurn = false;
-
         if (lastTurnFree == true)
         {
         	if (playerTurn == true)
@@ -236,7 +220,6 @@ public class Board {
         }
         
         notifyListeners();
-        }
     }
     
     /**
@@ -316,209 +299,6 @@ public class Board {
     /**
      * Changes to the next player turn
      */
-/*
-    public void changePlayerTurn()
-    {
-        playerTurn = !playerTurn;
-//        undoCounter = 0; 
- */
-        /*
-        NOTE the above line should be added when the next player takes their turn and not when
-        the current player ends their turn since they have time to undo until the next player 
-        makes a move
-        */
-/*
-    }
-    */
-    /**
-     * Undoes the player's last move. Checks if the player can undo, if so, it removes all 
-     * stones that were distributed and returns them to the original position.
-     */
-    /*
-    public void undo()
-    {
-        
-        int numStones = 0;
-        System.out.println("player turn before undo if = " + playerTurn);
-        System.out.println("player undocounter before undo if = " + undoCounter2);
-        if (((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3)
-                || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo()))) && justUndid == false)
-        {
-            //System.out.println("last turn " + lastTurn + " items were moved");
-            currHole++; //inc by 1 to avoid logic error in loop
-            //changePlayerTurn();
-            do{
-                currHole = (currHole + 13) % 14;    //decrements currHole pointer by 1
-                //System.out.println("currHole in do: " + currHole);
-                lastTurn--;
-                if (skipRetMancala()){
-                    //System.out.println("skipped");
-                    lastTurn++;
-                    continue;
-                }
-                numStones++;
-                decArrVal(currHole);                
-                
-            }while(lastTurn >= 0);
-            
-            numStones += holes.get(currHole); //finds current val and adds the stones to be restored
-            holes.set(currHole, numStones); //restores stones
-            //changePlayerTurn();
-            
-            if (playerTurn == true)
-        	{
-        		undoCounter2++;
-        		playerTurn = false;
-        	}
-        	else
-        	{
-        		undoCounter1++;
-        		playerTurn = true;
-        	}
-            
-            //System.out.println("undo counter (in undo)= " + undoCounter);
-//            if(undoCounter2 <= 3 && undoCounter2 >= 0)
-//                playerTurn = false;
-//            if (undoCounter1 <= 3 && undoCounter1 >= 0)
-//                playerTurn = true;
-//            if (playerTurn == false)
-//            {
-//                undoCounter1 = 0;
-//                undoCounter2++;
-//            }
-//            else if (playerTurn == true)
-//            {
-//                undoCounter2 = 0;
-//                undoCounter1++;
-//            }
-            justUndid = true;
-            if (lastTurnFree == true){
-                changePlayerTurn();
-                undoCounter2++;
-                undoCounter1++;
-            }
-            
-        }
-        System.out.println("player turn after almost everything = " + playerTurn);
-//        if (playerTurn == true && oneCanUndo() && undoCounter1 == 2)
-//            playerTurn = false;
-//        else if (playerTurn == false && twoCanUndo() && undoCounter2 == 2)
-//            playerTurn = true;
-//        System.out.println(playerTurn == false && twoCanUndo() && undoCounter2 == 2);
-//        System.out.println("player turn after everything = " + playerTurn);
-        
-        notifyListeners();
-    }
-    */
-    /**
-     * Returns the number of undos left for the current player
-     * @return Number of undos left
-     */
-    /**
-    public int getUndos()
-    {
-        if (playerTurn == false)
-        {
-            if (justUndid)
-                return (3 - undoCounter2);
-            else
-                return (3 - undoCounter1);
-        }
-        else if (playerTurn == true)
-        {
-            if(justUndid)
-                    return (3 - undoCounter1);
-            else
-                return (3 - undoCounter2);
-        }
-        else
-            return (3 - undoCounter1);
-    }
-    **/
-    
-    /**
-     * Gets the number of undos used by player 1
-     * @return the number of undos used by player 1
-     */
-    public int getUndoCounter1()
-    {
-    	return (3 - undoCounter2);
-    }
-    
-    /**
-     * Gets the number of undos used by player 2
-     * @return the number of undos used by player 2
-     */
-    public int getUndoCounter2()
-    {
-    	return (3 - undoCounter1);
-    }
-    
-    /**
-     * Decrements the value at the given hole by 1. Updates ChangeListener.
-     * @param i location of hole to be changed
-     */
-    private void decArrVal(int i)
-    {
-        Integer value = holes.get(i);
-        value--;
-        holes.set(i, value);
-    }
-    
-    /**
-     * Checks if player 1 is allowed to undo. A player can only undo 3 times per his/her turn
-     * @return true if undo is allowed
-     */
-    private boolean oneCanUndo()
-    {
-    	playerTurn = false;
-        System.out.println("1undoC1 = " +undoCounter1);
-        System.out.println("1undoC2 = " +undoCounter2);
-        if (playerTurn == false && undoCounter2 <= 2 ){
-            playerTurn = false;
-            //undoCounter1 = 0;
-            return true;
-        }
-        else
-            return false;
-    }
-    
-    /**
-     * Checks if player 2 is allowed to undo. A player can only undo 3 times per his/her turn
-     * @return true if undo is allowed
-     */
-    private boolean twoCanUndo()
-    {
-    	playerTurn = true;
-        System.out.println("2undoC1 = " +undoCounter1);
-        System.out.println("2undoC2 = " +undoCounter2);
-        if (playerTurn == true && undoCounter1 <= 2){
-            playerTurn = true;
-            //undoCounter2 = 0;
-            return true;
-        }
-        else            
-            return false;
-    }
-    
-    private boolean changeUndo()
-    {
-        return false;
-    }
-    
-//    /**
-//     * Triggers when the undo counter should be reset
-//     * @return true if the counter should be reset
-//     */
-//    private boolean resetUndoTracker()
-//    {
-//        if (playerTurn == false)
-//            resetUndoCounter++;
-//        else if (playerTurn == true)
-//            resetUndoCounter++;
-//        return false;
-//    }
-    
     private void changePlayerTurn()
     {	playerTurn = !playerTurn;	}
     

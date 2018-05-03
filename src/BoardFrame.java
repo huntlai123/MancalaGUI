@@ -18,11 +18,11 @@ import javax.swing.event.ChangeListener;
  */
 public class BoardFrame extends JFrame
 {
-	/**
-	 * Creates a BoardFrame with the specified BoardPanel and Board objects.
-	 * @param panel BoardPanel object that displays the board game. Acts as both the controller and view.
-	 * @param board Board objects that acts as the model of the game.
-	 */
+    /**
+     * Creates a BoardFrame with the specified BoardPanel and Board objects.
+     * @param panel BoardPanel object that displays the board game. Acts as both the controller and view.
+     * @param board Board objects that acts as the model of the game.
+     */
     BoardFrame(BoardPanel panel, Board board)
     {
         JPanel control = new JPanel();
@@ -42,9 +42,9 @@ public class BoardFrame extends JFrame
                 {
                     public void stateChanged(ChangeEvent e)
                     {
-                    	player2UndoCount.setText("Player B: " + board.getUndoCounter2());
-                    	player1UndoCount.setText("Player A: " + board.getUndoCounter1() + "     ");
-                    	
+                        player2UndoCount.setText("Player B: " + board.getUndoCounter2());
+                        player1UndoCount.setText("Player A: " + board.getUndoCounter1() + "     ");
+                        
                         revalidate();
                     }
                 });
