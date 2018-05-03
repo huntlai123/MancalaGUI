@@ -83,17 +83,18 @@ public class Board {
             justUndid = false;
         }
         lastTurnFree = false;
-        if (!takeAnotherTurn())
+        boolean anotherTurn = takeAnotherTurn();
+        if (!anotherTurn)
             changePlayerTurn();
         
         if (playerTurn != false && currHole >= 0 && currHole <= 5 || playerTurn != true && currHole >= 7 && currHole <= 12)
             captureStones();
         
-        if (undoCounter2 == 3)
+        if (undoCounter2 == 3 && !anotherTurn)
         {        	
         	playerTurn = true;
         }
-        if (undoCounter1 == 3)
+        if (undoCounter1 == 3 && !anotherTurn)
         {        	
         	playerTurn = false;
         }
@@ -217,7 +218,8 @@ public class Board {
         int numStones = 0;
         System.out.println("player turn before undo if = " + playerTurn);
         System.out.println("player undocounter before undo if = " + undoCounter2);
-        if (((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3) || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo()))) && justUndid == false)
+        if (((playerTurn == false && oneCanUndo() && playerTurn == false && undoCounter1 != 3)
+                || ((playerTurn == true && undoCounter2 < 3) && (playerTurn == true && twoCanUndo()))) && justUndid == false)
         {
             //System.out.println("last turn " + lastTurn + " items were moved");
             currHole++; //inc by 1 to avoid logic error in loop
