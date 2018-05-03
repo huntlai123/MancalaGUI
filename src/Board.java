@@ -135,7 +135,7 @@ public class Board {
         			{
         				undoCounter1--;
         			}
-        			changePlayerTurn();
+                    changePlayerTurn();
         		}
         		notifyListeners();
         	}
