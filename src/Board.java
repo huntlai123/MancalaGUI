@@ -13,6 +13,7 @@ public class Board {
     private int undoCounter1;   						// counter for player A
     private int undoCounter2;   						// counter for player B
     private int currHole;   							// current hole to receive stones
+    private boolean clickedOnHole;                      // This keeps track if the clickedOnHole was valid or not
     
     private CircularList<Integer> holes;    			// ArrList used to represent the holes in the board including each player's Mancala
     private CircularList<Integer> prevHoles; 
@@ -29,6 +30,7 @@ public class Board {
        undoCounter1 = MAX_UNDOS;
        undoCounter2 = MAX_UNDOS;
        currHole = 0;
+       clickedOnHole = true;
         
        listeners = new ArrayList<ChangeListener>();
         
@@ -57,6 +59,7 @@ public class Board {
         undoCounter1 = MAX_UNDOS;
         undoCounter2 = MAX_UNDOS;
         currHole = 0;
+        clickedOnHole = true;
          
         listeners = new ArrayList<ChangeListener>();
          
@@ -171,6 +174,9 @@ public class Board {
     	
     	boolean lastTurnFree;
     	
+    	clickedOnHole = true;
+    	if(holes.get(holeNum) == 0)
+    	        clickedOnHole = false;
         currHole = holeNum; //gets the hole to add a stone into
         int numStones = holes.get(currHole);    //take stones from this hole
         holes.set(currHole, 0); //set hole to have 0 stones
@@ -276,7 +282,7 @@ public class Board {
         {
             return true;
         }
-        else if (holes.get(currHole) == 0)
+        else if (!clickedOnHole)
             return true;
             
         else

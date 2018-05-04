@@ -21,6 +21,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 	
 	private BoardStyle style;							//	Reference to BoardStyle object
 	private Board model;								// 	Reference to Board(Model)
+	private CircularList<Integer> pitValues;
 	
 	private Pit[] pits;									//  Array of Pits
 	
@@ -34,6 +35,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		pits = new Pit[NUM_OF_PITS];
+	    pitValues = model.getCircularList();
 		initializeMouseListener();
 	}
 	
@@ -49,6 +51,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		pits = new Pit[NUM_OF_PITS];
+	    pitValues = model.getCircularList();
 		initializeMouseListener();
 	}
 	
@@ -65,6 +68,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 		setSize(width, height);
 		setPreferredSize(new Dimension(width, height));
 		pits = new Pit[NUM_OF_PITS];
+	    pitValues = model.getCircularList();
 		initializeMouseListener();
 	}
 	
@@ -76,7 +80,6 @@ public class BoardPanel extends JPanel implements ChangeListener
 		super.paintComponent(_pen);
 		Graphics2D pen = (Graphics2D)_pen;
 		pits = style.createPits(pen, getWidth(), getHeight());
-		CircularList<Integer> pitValues = model.getCircularList();
 		
 		for(int i = 0; i < pitValues.size(); i++)
 		{
@@ -139,7 +142,7 @@ public class BoardPanel extends JPanel implements ChangeListener
                                         {
                                                 if (pits[i].contains(MousePoint) && model.allowMove(pits[i].getPitNum()))
                                                 {                                                    
-                                                        model.updateBoard(pits[i].getPitNum());                                                        
+                                                    model.updateBoard(pits[i].getPitNum());                                                        
                                                 }
                                         }
                                         if (model.endGame())
@@ -156,6 +159,7 @@ public class BoardPanel extends JPanel implements ChangeListener
     */
 	public void stateChanged(ChangeEvent e)
 	{
+	    pitValues = model.getCircularList();
 	    repaint();
 	}
     
