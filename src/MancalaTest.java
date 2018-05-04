@@ -1,7 +1,7 @@
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
-import java.awt.event.WindowEvent;
 import java.util.Scanner;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -102,9 +102,38 @@ public class MancalaTest {
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        board = new Board(Integer.parseInt(input.getText()));
-                        styleScreen();
-                        frame.dispose();
+                        int numStones = Integer.parseInt(input.getText());
+                        if(numStones == 3 | numStones == 4)
+                        {
+                            board = new Board(numStones);
+                            styleScreen();
+                            frame.dispose();
+                        }
+                        else
+                        {
+                            JFrame invalidNum = new JFrame();
+                            JTextArea alert = new JTextArea("Invalid number of stones, please try again");
+                            alert.setEditable(false);
+                            alert.setLineWrap(true);
+                            alert.setWrapStyleWord(true);
+                            JButton okay = new JButton("OK");
+                            okay.addActionListener(
+                                    new ActionListener()
+                                    {
+                                        public void actionPerformed(ActionEvent e)
+                                        {
+                                            invalidNum.dispose();
+                                        }
+                                    });
+                            invalidNum.add(alert);
+                            invalidNum.add(okay);
+                            invalidNum.setPreferredSize(new Dimension(150, 150));
+                            invalidNum.setLayout(new BoxLayout(invalidNum.getContentPane(), BoxLayout.Y_AXIS));
+                            invalidNum.pack();
+                            invalidNum.setLocationRelativeTo(null);
+                            invalidNum.setVisible(true);
+                        }
+                        
                     }
                 });
         
