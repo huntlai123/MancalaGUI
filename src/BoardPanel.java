@@ -142,7 +142,8 @@ public class BoardPanel extends JPanel implements ChangeListener
                                         {
                                                 if (pits[i].contains(MousePoint) && model.allowMove(pits[i].getPitNum()))
                                                 {                                                    
-                                                    model.updateBoard(pits[i].getPitNum());                                                        
+                                                    if(model.getCircularList().get(i) !=0)
+                                                        model.updateBoard(pits[i].getPitNum());                                                        
                                                 }
                                         }
                                         if (model.endGame())
