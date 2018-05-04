@@ -102,7 +102,15 @@ public class MancalaTest {
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        int numStones = Integer.parseInt(input.getText());
+                    	int numStones = 0;
+                        try{
+                            numStones = Integer.parseInt(input.getText());
+                        }
+                        catch(NumberFormatException ex)
+                        {
+                            
+                        }
+
                         if(numStones == 3 | numStones == 4)
                         {
                             board = new Board(numStones);
