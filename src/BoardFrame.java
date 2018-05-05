@@ -1,6 +1,3 @@
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 
 import javax.swing.JButton;
@@ -13,7 +10,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  * Frame that uses BoardPanel, two JPanels, and JButton to create the UI of the game
- * @author Fantastic Four
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  *
  */
 public class BoardFrame extends JFrame
@@ -59,13 +56,6 @@ public class BoardFrame extends JFrame
                         revalidate();
                     }
                 });
-        
-        /**
-        JTextArea player1 = new JTextArea("Player 1's Pit");
-        JTextArea player2 = new JTextArea("Player 2's Pit");
-        player1.setEditable(false);
-        player2.setEditable(false);
-        **/
 
         control.add(playersTurn);
         control.add(undo);

@@ -1,10 +1,9 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
-import java.awt.event.*;
 
 /**
  * Represents a pit object that will be made into an array. These pit objects will be used for either player's side to hold his/her stones.
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public class Pit
 {

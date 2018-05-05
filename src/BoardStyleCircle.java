@@ -3,10 +3,10 @@ import java.awt.geom.*;
 
 /**
  * Represents a style for the Mancala program that uses circle components for the pit.
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public class BoardStyleCircle implements BoardStyle
 {
-	private Color c;
 	
     /**
      * Draw method that will be called to draw the circle pits into the frame. It specifies the size of the circles 

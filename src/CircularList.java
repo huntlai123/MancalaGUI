@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * This class updates ArrayList with a new functionality allowing it
  * to loop through the elements
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public class CircularList<E> extends ArrayList<E>{
     

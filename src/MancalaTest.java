@@ -1,8 +1,6 @@
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
-import java.util.Scanner;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +10,8 @@ import javax.swing.JTextField;
 
 
 /**
- *	
+ * Tester class for the Mancala game
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public class MancalaTest {
 

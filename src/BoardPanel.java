@@ -1,16 +1,13 @@
 import javax.swing.*;
 import javax.swing.event.*;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.lang.Math;
 
 
 /**
- * Board Panel
- * @author Fantastic Four
+ * Panel for the Board user interface
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  *
  */
 public class BoardPanel extends JPanel implements ChangeListener
@@ -21,7 +18,7 @@ public class BoardPanel extends JPanel implements ChangeListener
 	
 	private BoardStyle style;							//	Reference to BoardStyle object
 	private Board model;								// 	Reference to Board(Model)
-	private CircularList<Integer> pitValues;
+	private CircularList<Integer> pitValues;			//  Reference to the ciruclarList of model
 	
 	private Pit[] pits;									//  Array of Pits
 	
@@ -184,15 +181,4 @@ public class BoardPanel extends JPanel implements ChangeListener
     {
     	model.undo();
     }
-    
-    /**
-     * Returns the number of undos left in String form
-     * @return String containing the number of undos left.
-     */
-    /**
-    public String getUndoCount()
-    {
-    	return "("+model.getUndos()+")";
-    }
-    **/
 }

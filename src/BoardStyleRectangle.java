@@ -4,10 +4,10 @@ import java.awt.geom.*;
 
 /**
  * Represents a style for the Mancala program that uses rectangle components for the pits.
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public class BoardStyleRectangle implements BoardStyle
 {
-	private Color c;
 	
     /**
      * Draw method that will be called to draw the rectangle pits being drawn in the frame. It specifies the size of the rectangles on each player's 

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 /**
  * Style interface that sets requirements for the rest of the styles that will 
  * implement it.
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  */
 public interface BoardStyle
 {

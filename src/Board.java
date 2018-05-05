@@ -3,6 +3,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
+ * Acts as the model of the MVC Pattern of the Mancala program.
+ * Calculates the how the game is run.
+ * @author Fantastic Four - Hunter Lai, Alejandro Lopez, Dale Christian Seen
  *
  */
 public class Board {
@@ -13,11 +16,10 @@ public class Board {
     private int undoCounter1;   						// counter for player A
     private int undoCounter2;   						// counter for player B
     private int currHole;   							// current hole to receive stones
-    //private boolean clickedOnHole;                      // This keeps track if the clickedOnHole was valid or not
     
     private CircularList<Integer> holes;    			// ArrList used to represent the holes in the board including each player's Mancala
-    private CircularList<Integer> prevHoles; 
-    private ArrayList<ChangeListener> listeners;
+    private CircularList<Integer> prevHoles; 			// ArrayList used to save the previous state of the board (Used for Undo)
+    private ArrayList<ChangeListener> listeners;		// ArrayList used to store all listeners (For MVC Pattern)
     
     /**
      * Default constructor. Builds an empty board. 
@@ -30,11 +32,10 @@ public class Board {
        undoCounter1 = MAX_UNDOS;
        undoCounter2 = MAX_UNDOS;
        currHole = 0;
-       //clickedOnHole = true;
         
        listeners = new ArrayList<ChangeListener>();
         
-       holes = new CircularList<Integer>();   //in order to make this circular, need to extend arraylist or create our own circular array
+       holes = new CircularList<Integer>();   				//in order to make this circular, need to extend arraylist or create our own circular array
         
        for (int i = 0; i < 14; i++)
        {
@@ -59,7 +60,6 @@ public class Board {
         undoCounter1 = MAX_UNDOS;
         undoCounter2 = MAX_UNDOS;
         currHole = 0;
-        //clickedOnHole = true;
          
         listeners = new ArrayList<ChangeListener>();
          
@@ -174,12 +174,9 @@ public class Board {
     	
     	boolean lastTurnFree;
     	
-    	//clickedOnHole = true;
-    	//if(holes.get(holeNum) == 0)
-    	        //clickedOnHole = false;
-        currHole = holeNum; //gets the hole to add a stone into
-        int numStones = holes.get(currHole);    //take stones from this hole
-        holes.set(currHole, 0); //set hole to have 0 stones
+        currHole = holeNum; 						//gets the hole to add a stone into
+        int numStones = holes.get(currHole);    	//take stones from this hole
+        holes.set(currHole, 0); 					//set hole to have 0 stones
         while(numStones > 0)
         {
             currHole = (currHole + 1) % 14;
@@ -238,18 +235,16 @@ public class Board {
     {
         if(pitNum >= 0 && pitNum <=5 && playerTurn == false)
         {
-            //resetUndo = true;
-            // undoCounter1 = 0;
             return true;
         }
         else if (pitNum >= 7 && pitNum <= 12 && playerTurn == true)
         {
-            // undoCounter2 = 0;
-            //resetUndo = false;
             return true;
         }
         else
+        {
             return false;
+        }
     }
     
     /**
@@ -260,11 +255,17 @@ public class Board {
     private boolean skipMancala()
     {
         if (currHole % 14 == 6 && playerTurn == true)
+        {
             return true;
+        }
         else if (currHole % 14 == 13 && playerTurn == false)
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
     
     /**
@@ -282,11 +283,10 @@ public class Board {
         {
             return true;
         }
-        //else if (!clickedOnHole)
-            //return true;
-            
         else
+        {
             return false;
+        }
     }
     
     /**
@@ -298,8 +298,6 @@ public class Board {
         Integer value = holes.get(i);
         value++;
         holes.set(i, value);
-        
-        holes.set(i, value);    //redundant
     }
     
     /**
@@ -338,17 +336,17 @@ public class Board {
      */
     public boolean endGame()
     {
-        int counter1 = 0;   //counts player 1's side
-        int counter2 = 0;   //counts player 2's side
-        int sum = 0;        //sums stones to be added
-        for (int i = 0; i < 6; i++)     //checks if player 1's side is empty
+        int counter1 = 0;   					//counts player 1's side
+        int counter2 = 0;   					//counts player 2's side
+        int sum = 0;        					//sums stones to be added
+        for (int i = 0; i < 6; i++)     		//checks if player 1's side is empty
         {
             if (holes.get(i) == 0)
             {
                 counter1++;
             }
         }
-        for (int i = 7; i < 13; i++)    //checks if player 2's side is empty
+        for (int i = 7; i < 13; i++)    		//checks if player 2's side is empty
         {
             if (holes.get(i) == 0)
             {
@@ -356,7 +354,7 @@ public class Board {
             }
         }
         
-        if(counter1 == 6)               //if player 1's side is empty, sum all stones in p2's side
+        if(counter1 == 6)               		//if player 1's side is empty, sum all stones in p2's side
         {
             for (int i = 7; i < 13; i++)
             {
@@ -364,10 +362,10 @@ public class Board {
                 holes.set(i, 0);
             }
             sum += holes.get(13);
-            holes.set(13, sum); //set hole to have the sum of all the stones on this player's side
+            holes.set(13, sum); 				//set hole to have the sum of all the stones on this player's side
             return true;
         }
-        else if (counter2 == 6)         //if player 2's side is empty, sum all stones in p1's side
+        else if (counter2 == 6)         		//if player 2's side is empty, sum all stones in p1's side
         {
             for (int i = 0; i < 6; i++)
             {
@@ -375,12 +373,13 @@ public class Board {
                 holes.set(i, 0);
             }
             sum += holes.get(6);
-            holes.set(6, sum); //set hole to have the sum of all the stones on this player's side
+            holes.set(6, sum); 					//set hole to have the sum of all the stones on this player's side
             return true;
         }
-        
         else
+        {
             return false;
+        }
     }
     
     /**
@@ -393,8 +392,8 @@ public class Board {
         if(holes.get(currHole) == 1 && holes.get(12 - currHole) != 0 
                 && currHole != 6 && currHole != 13)
         {
-            int location = 12 - currHole;               //gets the location of the opposing player
-            int stones = holes.get(location) + 1; //gets stones from the opposing player + 1 from curr player's pit
+            int location = 12 - currHole;               		//gets the location of the opposing player
+            int stones = holes.get(location) + 1; 				//gets stones from the opposing player + 1 from curr player's pit
             
             holes.set(location, 0);
             holes.set(currHole, 0);
@@ -420,9 +419,13 @@ public class Board {
     public String getWinningPlayer()
     {
         if (holes.get(6) > holes.get(13))
+        {
             return "Player 1 Wins! Congrats!";
+        }
         else 
+        {
             return "Player 2 Wins! Congrats!";
+        }
     }
     
     /**
